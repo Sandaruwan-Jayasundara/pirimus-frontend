@@ -1,7 +1,7 @@
 // serverApi.ts
 import {getServerAuth} from "@/lib/serverAuth";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://92.205.29.121:8081";
 
 export const apiServer = (getToken: () => string | null, logout: () => Promise<void> | void) => {
   const handleRequest = async (method: "GET" | "POST" | "PUT" | "DELETE", url: string, data?: unknown) => {

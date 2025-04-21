@@ -75,7 +75,7 @@ export function Account()
   const handleChangePassword = async () => {
     try
     {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080'}/auth/change-password`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://92.205.29.121:8081'}/auth/change-password`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

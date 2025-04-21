@@ -33,7 +33,7 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://92.205.29.121:8081";
 
 // Zod schema for OTP
 const OtpFormSchema = z.object({

@@ -27,7 +27,7 @@ export interface UpdateProfileRequest {
 }
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080";
+  process.env.NEXT_PUBLIC_API_BASE_URL || "http://92.205.29.121:8081";
 
 // Utility to get cookie by name (moved here for convenience)
 const getCookie = (name: string): string | null => {

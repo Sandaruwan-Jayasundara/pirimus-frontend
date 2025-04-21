@@ -98,7 +98,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const currentToken = getToken();
       if (currentToken) {
         const API_BASE_URL =
-          process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080";
+          process.env.NEXT_PUBLIC_API_BASE_URL || "http://92.205.29.121:8081";
         try {
           await fetch(`${API_BASE_URL}/auth/logout`, {
             method: "POST",

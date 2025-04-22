@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { columns } from "./CheckAvailabilityColumns";
-import { Patient } from "@/type/patient"; 
+import { Patient } from "@/type/patient";
 import { getRoomByDateAndTime } from "@/api/AppointmentApi";
 import { getWorkingHoursByIdAction } from "@/api/WorkingHoursApi";
 import { getBlockedTimingAction } from "@/api/BlockedTimingApi";
@@ -53,7 +53,6 @@ interface RoomData {
   patientPayment?: PatientPayment;
 }
 
-
 export function CheckAvailabilityTable<TData extends Psychologist>({
   title,
   psychologistData,
@@ -78,21 +77,22 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
     }[]
   >([]);
 
-
-  useEffect(()=>{
-    setRoomData([{
-      psyAvailability: "initial",
-      id: 0,
-      startTime: "",
-      endTime: "",
-      patient: {} as Patient,
-      psychologist: undefined,
-      roomId: 0,
-      roomName: "",
-      branchId: 0,
-      patientPayment: undefined,
-    }]);
-  },[])
+  useEffect(() => {
+    setRoomData([
+      {
+        psyAvailability: "initial",
+        id: 0,
+        startTime: "",
+        endTime: "",
+        patient: {} as Patient,
+        psychologist: undefined,
+        roomId: 0,
+        roomName: "",
+        branchId: 0,
+        patientPayment: undefined,
+      },
+    ]);
+  }, []);
 
   const [psychologistId, setPsychologist] = React.useState("");
   // Fetch all slots and busy slots based on selected patient and date
@@ -146,7 +146,9 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
 
         const initialBlockedTiming = await getBlockedTimingAction();
         const dayName = timeDate
-          ? timeDate.toLocaleDateString("en-US", { weekday: "long" }).toUpperCase()
+          ? timeDate
+              .toLocaleDateString("en-US", { weekday: "long" })
+              .toUpperCase()
           : "";
 
         initialBlockedTiming[0]?.blockedTiming
@@ -160,7 +162,6 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
         if (todaytime != null) {
           blockArr.push(todaytime);
         }
-
 
         const parseRange = (range: string): TimeRange => {
           const [start, end] = range
@@ -186,14 +187,13 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
               mergedRanges.push(range);
             } else {
               mergedRanges[mergedRanges.length - 1].end = Math.max(
-          mergedRanges[mergedRanges.length - 1].end,
-          range.end
+                mergedRanges[mergedRanges.length - 1].end,
+                range.end
               );
             }
           }
           return mergedRanges.map(({ start, end }) => `${start} - ${end}`);
         };
-
 
         const removeBlockedSlots = (
           slots: string[],
@@ -222,7 +222,7 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
           blockedRanges
         );
         setAvailableTimeSlots(availableSlots);
-      } catch  {
+      } catch {
         setAvailableTimeSlots([]);
       }
     };
@@ -238,34 +238,41 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
       const room: RoomData[] = (await getRoomByDateAndTime(timeDate, time)).map(
         (appointment) => ({
           ...appointment,
-          psyAvailability: "Unknown", 
+          psyAvailability: "Unknown",
         })
       );
-      const psychologistResponse: WorkingHours[] = await getWorkingHoursByIdAction(
-        Number(psychologistId) || 0
-      );
-      
-
-      if (room || psychologistResponse) {
+      const psychologistResponse: WorkingHours[] =
+        await getWorkingHoursByIdAction(Number(psychologistId) || 0);
+      if (room || psychologistResponse.length > 0) {
         const dayName = new Date(timeDate)
           .toLocaleDateString("en-US", { weekday: "long" })
           .toUpperCase();
         const [inputStartRaw, inputEndRaw] = time.split("-");
 
         // Check each psychologist
-        const results = psychologistResponse.map((psychologist) => {
-          const workingHours = psychologist.available?.dayOfWeek?.includes(dayName)
-            ? psychologist.available
+        const results = psychologistResponse?.map((psychologist) => {
+          // const workingHours = psychologist.available?.dayOfWeek?.includes(dayName)? psychologist.available: undefined;
+          const workingHours = Array.isArray(psychologist.available)
+            ? psychologist.available.find(
+                (day: {
+                  dayOfWeek: string;
+                  slots: { startTime: string; endTime: string }[];
+                }) => day.dayOfWeek === dayName
+              )
             : undefined;
+
           if (workingHours) {
-            const timeResult = (workingHours?.slots ?? []).map((slot) => {
-              const startTime = slot?.startTime?.split(":")[0];
-              const endTime = slot?.endTime?.split(":")[0];
-              const isWithinRange =
-                Number(inputStartRaw) >= Number(startTime) &&
-                Number(inputEndRaw) <= Number(endTime);
-              return isWithinRange;
-            });
+            const timeResult: boolean[] = (workingHours?.slots ?? []).map(
+              (slot: { startTime: string; endTime: string }) => {
+                const startTime: string = slot?.startTime?.split(":")[0];
+                const endTime: string = slot?.endTime?.split(":")[0];
+                const isWithinRange: boolean =
+                  Number(inputStartRaw) >= Number(startTime) &&
+                  Number(inputEndRaw) <= Number(endTime);
+
+                return isWithinRange;
+              }
+            );
 
             return timeResult?.some((result: boolean) => result === true)
               ? "AVAILABLE"
@@ -274,26 +281,19 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
             return "Unavailable";
           }
         });
-
         setRoomData(
           room.map((item) => ({
             ...item,
-            psyAvailability: results[0],
+            psyAvailability: results[0] ? results[0] : "Unavailable",
           }))
         );
       } else {
-        setRoomData([
-          { psyAvailability: "Unavailable" } as RoomData,
-        ]);
+        setRoomData([{ psyAvailability: "Unavailable" } as RoomData]);
       }
     } else {
       setRoomData([]);
     }
   };
-
-
-
-  
 
   return (
     <>
@@ -355,7 +355,6 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
         </Button>
       </div>
       <AvailabilityTable title={title} columns={columns} data={roomData} />
-
     </>
   );
 }

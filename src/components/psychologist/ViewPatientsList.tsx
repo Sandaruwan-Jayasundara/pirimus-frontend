@@ -62,7 +62,6 @@ const ViewPatientsList: React.FC<ViewPatientsListProps> = ({
       await fetchEarnings();
     }
   };
-  console.log("adminEarnings:::", adminEarnings);
 
   return (
     <Dialog

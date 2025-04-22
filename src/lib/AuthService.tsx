@@ -26,8 +26,7 @@ export interface UpdateProfileRequest {
   phoneNumber: string | number;
 }
 
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://92.205.29.121:8081";
+const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 // Utility to get cookie by name (moved here for convenience)
 const getCookie = (name: string): string | null => {

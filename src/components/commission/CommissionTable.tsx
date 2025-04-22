@@ -70,7 +70,7 @@ export function CommissionTable<TData extends CommissionDto, TValue>({
 
   // Modify the status column for the "pending" tab if user is ADMIN
   const modifiedColumns: ColumnDef<TData, TValue>[] = baseColumns.map((col) =>
-    col.id === "status" && tab === "pending" && user?.role === Role.ADMIN
+    col.id === "status" && tab === "pending"
       ? {
           ...col,
           id: "status", // Explicitly set id to ensure consistency
@@ -79,26 +79,49 @@ export function CommissionTable<TData extends CommissionDto, TValue>({
             const isLoading = loadingId === commission.commissionId;
 
             return (
-              <Select
-                value={commission.status}
-                onValueChange={(value) =>
-                  handleStatusChange(
-                    commission.commissionId,
-                    value as "PENDING" | "PAID"
-                  )
-                }
-                disabled={isLoading}
-              >
-                <SelectTrigger className="w-[100px]">
-                  <SelectValue>
-                    {isLoading ? "Updating..." : commission.status}
-                  </SelectValue>
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="PENDING">Pending</SelectItem>
-                  <SelectItem value="PAID">Paid</SelectItem>
-                </SelectContent>
-              </Select>
+              <>
+                {user?.role === Role.PSYCHOLOGIST ? (
+                  <span className="text-sm text-muted-foreground">
+                    {commission.status === "PENDING" ? (
+                      <p className="text-sm bg-yellow-100 text-yellow-800 px-2 py-1 rounded">
+                        Pending Payment
+                      </p>
+                    ) : (
+                      <p className="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">
+                        Paid
+                      </p>
+                    )}
+                  </span>
+                ) : (
+                  <Select
+                    value={commission.status}
+                    onValueChange={(value) =>
+                      handleStatusChange(
+                        commission.commissionId,
+                        value as "PENDING" | "PAID"
+                      )
+                    }
+                    disabled={isLoading}
+                  >
+                    <SelectTrigger
+                      className={`w-[100px] text-sm px-2 py-1 rounded
+                        ${
+                          commission.status === "PAID"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-yellow-100 text-yellow-800"
+                        }`}
+                    >
+                      <SelectValue>
+                        {isLoading ? "Updating..." : commission.status}
+                      </SelectValue>
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="PENDING">Pending</SelectItem>
+                      <SelectItem value="PAID">Paid</SelectItem>
+                    </SelectContent>
+                  </Select>
+                )}
+              </>
             );
           },
         }
@@ -106,10 +129,7 @@ export function CommissionTable<TData extends CommissionDto, TValue>({
   );
 
   // Filter out the status column if the user is not an admin
-  const finalColumns: ColumnDef<TData, TValue>[] =
-    user?.role !== Role.ADMIN
-      ? modifiedColumns.filter((col) => col.id !== "status")
-      : modifiedColumns;
+  const finalColumns: ColumnDef<TData, TValue>[] = modifiedColumns;
 
   return (
     <DataTable

@@ -156,7 +156,7 @@ export function Cards({
           <CardTitle className="text-lg font-semibold text-foreground">
             Room Income Status
           </CardTitle>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             <Popover>
               <PopoverTrigger asChild>
                 <Button variant="outline" className="w-[180px] text-left">
@@ -191,9 +191,9 @@ export function Cards({
       <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-lg font-semibold text-foreground">
-            Psychologist Revenue Status
+            Psychologist Revenue
           </CardTitle>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
           <Popover>
               <PopoverTrigger asChild>
                 <Button variant="outline" className="w-[180px] text-left">

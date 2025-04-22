@@ -85,10 +85,8 @@ export function PaymentRecordTable() {
     const fetchPayments = async () => {
       const pendingCommissions = await getPendingCommissionsAction();
       const paidCommissions = await getPaidCommissionsAction();
-
       // Combine the arrays
       const combinedCommissions = [...pendingCommissions, ...paidCommissions];
-
       // Set the combined data
       setRoomCommission(combinedCommissions);
     };
@@ -99,7 +97,7 @@ export function PaymentRecordTable() {
   useEffect(() => {
     const fetchPayments = async (selectedDate: Date) => {
       try {
-        const data = await getPaymentRecordHistoryAction(selectedDate.getTime());
+        const data = await getPaymentRecordHistoryAction(selectedDate);
 
         setPayments(data as Payment[]);
       } catch (err) {
@@ -154,7 +152,7 @@ export function PaymentRecordTable() {
       <hr />
       <div className="p-6 ">
         <CommissionTable
-          title={"Room Fee"}
+          title={"Room Payments"}
           data={roomCommission}
           tab="pending"
         />

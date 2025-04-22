@@ -199,9 +199,7 @@ export function WorkingHoursWithTime({initialAvailability, onAvailabilitySet}: W
 
       if (initialAvailability?.id) {
         const filteredAvailability = initialAvailability;
-
         const data = { ...filteredAvailability, available: transformedData };
-
         response = await updateWorkingHoursAction(data) as Availability[];
       } else {
         response = await addWorkingHoursAction({ available: transformedData }) as Availability[];

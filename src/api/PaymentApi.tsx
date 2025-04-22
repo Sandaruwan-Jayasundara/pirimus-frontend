@@ -24,7 +24,7 @@ export async function getPaymentHistoryAction(selectedDate: Date): Promise<Payme
 
 // Server Action to get payment history
 export async function getPaymentRecordHistoryAction
-(date: number) {
+(date: Date) {
   const { get } = await serverApi();
   const payments = await get(`/api/payments/history-record/${date}`); 
   return payments;

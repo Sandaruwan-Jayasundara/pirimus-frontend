@@ -48,7 +48,6 @@ export function AvailabilityRoomTable<TData extends { psyAvailability?: string }
     state: { sorting },
   });
 
-  console.log("table.getRowModel().rows:::", table.getRowModel());
 
   return (
     <div className="w-full">

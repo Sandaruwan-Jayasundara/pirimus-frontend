@@ -78,14 +78,11 @@ export function WorkingHoursForm({
     startTransition(async () => {
       try {
         let response;
-        console.log("Before Submitted working days:", formData);
-
         if (formData.id) {
           response = await updateWorkingHoursAction(formData);
         } else {
           response = await addWorkingHoursAction(formData);
         }
-        console.log("Submitted working days:", response);
         if (onWorkingHoursUpdated) onWorkingHoursUpdated(response as WorkingHours);
         if (onClose) onClose();
       } catch (err) {

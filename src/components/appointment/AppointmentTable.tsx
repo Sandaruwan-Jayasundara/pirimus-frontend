@@ -199,7 +199,7 @@ export function AppointmentTable<TData extends Appointment, TValue>({
           onAppointmentUpdated={handleAppointmentUpdated}
           onClose={handleDialogClose}
           appointmentToEdit={appointmentToEdit}
-          patients={patients} // Pass patients to AppointmentForm
+          patients={patients}
           setSearch={setSearch}
           search={search}
         />

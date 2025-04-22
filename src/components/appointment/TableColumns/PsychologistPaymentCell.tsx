@@ -16,9 +16,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-
-
-
 import { updatePsychologistPaymentDetailsAction } from "@/api/AppointmentApi";
 import { Appointment, PaymentStatus, PaymentType } from "@/type/appointment";
 // import { updatePsychologistPaymentDetailsAction } from "@/actions"; // adjust this too
@@ -126,7 +123,9 @@ const PsychologistPaymentCell: React.FC<Props> = ({ appointment }) => {
     setIsDialogOpen(false);
   };
 
-  const getFilteredStatuses = (paymentProportion: string | null | undefined) => {
+  const getFilteredStatuses = (
+    paymentProportion: string | null | undefined
+  ) => {
     if (paymentProportion === "FULL") return [PaymentStatus.COMPLETED];
     if (paymentProportion === "")
       return [PaymentStatus.PENDING, PaymentStatus.COMPLETED];
@@ -152,17 +151,17 @@ const PsychologistPaymentCell: React.FC<Props> = ({ appointment }) => {
               >
                 Payment Completed ${appointment?.paidAmount?.toFixed(2)}
               </div>
-            // ) 
-
-            // : appointment?.paymentStatus === PaymentStatus.NO_FEE ? (
-            //   <div
-            //     className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
-            //     role="alert"
-            //   >
-            //     No Fee Applied
-            //   </div>
-
             ) : (
+              // )
+
+              // : appointment?.paymentStatus === PaymentStatus.NO_FEE ? (
+              //   <div
+              //     className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+              //     role="alert"
+              //   >
+              //     No Fee Applied
+              //   </div>
+
               <>
                 <div>
                   <strong>Total Amount:</strong> $
@@ -236,12 +235,18 @@ const PsychologistPaymentCell: React.FC<Props> = ({ appointment }) => {
           <div className="mt-4 text-right space-x-2">
             {hasChanges && paymentStatus === PaymentStatus.COMPLETED ? (
               <>
-                <Button variant="outline" onClick={handleCancel} disabled={isLoading}>
+                <Button
+                  variant="outline"
+                  onClick={handleCancel}
+                  disabled={isLoading}
+                >
                   Cancel
                 </Button>
                 <Button
                   onClick={handleSave}
-                  disabled={isLoading || (paidAmount === appointment.patient.fee && paymentStatus === PaymentStatus.COMPLETED) }
+                  disabled={
+                    isLoading || paidAmount !== appointment?.patient?.fee
+                  }
                 >
                   {isLoading ? "Saving..." : "Save"}
                 </Button>

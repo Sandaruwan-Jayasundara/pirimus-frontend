@@ -12,7 +12,7 @@ export interface WorkingHours {
   length?: number;
   id?: number;
   psychologist?: number;
-  days?: string[]; // array of strings
+  days?: unknown;
   available?: {
     slots?: {
       startTime?: string;

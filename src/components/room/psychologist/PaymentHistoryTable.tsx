@@ -100,7 +100,7 @@ export function PaymentHistoryTable() {
     const fetchPayments = async (selectedDate: Date) => {
       try {
         const data = await getPaymentRecordHistoryAction(
-          selectedDate.getTime()
+          selectedDate
         );
 
         setPayments(data as Payment[]);

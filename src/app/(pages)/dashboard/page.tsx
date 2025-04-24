@@ -1,4 +1,6 @@
 // page.tsx (Server Component)
+export const dynamic = "force-dynamic";
+
 import { Cards } from "@/components/dashboard/counter-cards";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";

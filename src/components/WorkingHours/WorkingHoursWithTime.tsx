@@ -80,7 +80,7 @@ export function WorkingHoursWithTime({initialAvailability, onAvailabilitySet}: W
       },
     };
 
-    if (!initialAvailability || initialAvailability.days?.length === 0) {
+    if (!initialAvailability || (initialAvailability.days as Availability[])?.length === 0) {
       return defaultAvailability;
     }
 

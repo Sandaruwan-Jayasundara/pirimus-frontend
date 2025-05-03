@@ -301,7 +301,7 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
         {/* Time Slot Selection */}
         <div className="grid gap-2 me-4">
           <Select value={psychologistId} onValueChange={setPsychologist}>
-            <SelectTrigger id="psychologist" className="w-full">
+            <SelectTrigger id="psychologist" className="w-full bg-primary/10">
               <SelectValue placeholder="Select a psychologist" />
             </SelectTrigger>
             <SelectContent>
@@ -316,7 +316,7 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
 
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="outline" className="w-[180px] text-left">
+            <Button variant="outline" className="w-[180px] text-left bg-primary/10">
               {timeDate ? format(timeDate, "PPP") : "Pick a date"}
             </Button>
           </PopoverTrigger>
@@ -332,7 +332,7 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
         {/* Time Slot Selection */}
         <div className="grid gap-2 ms-4">
           <Select value={time} onValueChange={setTime} disabled={!timeDate}>
-            <SelectTrigger id="time" className="w-full">
+            <SelectTrigger id="time" className="w-full bg-primary/10">
               <SelectValue placeholder="Select a time slot" />
             </SelectTrigger>
             <SelectContent>

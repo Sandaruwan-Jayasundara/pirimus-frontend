@@ -60,12 +60,12 @@ export function DataTable<TData extends { startTime?: string; status?: string },
   return (
     <div className="w-full">
       <Card className="shadow-md ">
-        <CardHeader className="flex flex-col sm:flex-row items-center justify-between sm:space-x-4 space-y-4 sm:space-y-0 w-full">
-          <h3 className="text-xl sm:text-2xl font-semibold text-foreground flex-1 text-center md:text-start">
+        <CardHeader className="flex flex-col sm:flex-row items-center justify-between sm:space-x-4 space-y-4 sm:space-y-0 w-full bg-green-100/50 mb-5">
+          <h3 className="text-xl sm:text-xl font-semibold text-foreground flex-1 text-center md:text-start">
             {title}
           </h3>
 
-          <div className="flex flex-col sm:flex-row sm:items-center w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row sm:items-center w-full sm:w-auto mt-4">
             {isFilter && (
               <div className="mb-4 sm:mb-0 sm:mr-5 w-full sm:w-auto">
                 <select

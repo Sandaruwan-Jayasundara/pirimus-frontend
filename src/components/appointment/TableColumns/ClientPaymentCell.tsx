@@ -16,7 +16,7 @@ const ClientPaymentCell: React.FC<Props> = ({ appointment }) => {
 
   return (
     <div className="text-right">
-      <Button variant="outline" onClick={handleOpenDialog}>
+      <Button variant="outline" className="bg-yellow-500/10" onClick={handleOpenDialog}>
         Client Payment Info
       </Button>
       <ClientPaymentDialog

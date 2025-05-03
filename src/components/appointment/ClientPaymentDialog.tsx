@@ -135,7 +135,7 @@ export function ClientPaymentDialog({
           <DialogTitle>Client Payment Information</DialogTitle>
         </DialogHeader>
 
-        {(appointment.patient.isAssignByAdmin  && appointment.assignedByAdmin ) || (!appointment.patient.isAssignByAdmin && !appointment.assignedByAdmin) || (isAdmin && appointment.patient.isAssignByAdmin  && !appointment.assignedByAdmin )? (
+        {(appointment.patient.isAssignByAdmin  && appointment.assignedByAdmin ) || (isAdmin && appointment.patient.isAssignByAdmin  && !appointment.assignedByAdmin ) || (!isAdmin && !appointment.patient.isAssignByAdmin  && !appointment.assignedByAdmin )? (
           remainingAmount !== 0 ? (
             <>
               <div className="space-y-4">
@@ -228,7 +228,7 @@ export function ClientPaymentDialog({
               className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
               role="alert"
             >
-              Payment is managed by Admin
+              Payment is managed by Psychologist
             </div>
           </>
         )}

@@ -39,8 +39,7 @@ export async function getRoomIncomeCountAction(date: Date) {
 
 
 
-export async function getPsychologistCountAction
-(date: Date) {
+export async function getPsychologistCountAction (date: Date) {
   const { get } = await serverApi();
   const payments = await get(`/api/appointments/psycho-income/${date}`); 
   return payments;

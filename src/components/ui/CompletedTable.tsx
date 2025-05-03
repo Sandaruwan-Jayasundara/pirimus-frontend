@@ -93,8 +93,8 @@ export function CompletedTable<TData extends Appointment>({
       </div>
 
       <Card className="shadow-md">
-        <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
-          <h3 className="text-2xl font-semibold text-foreground">
+        <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0  bg-green-100/50 mb-5">
+          <h3 className="text-xl font-semibold text-foreground">
             {title ?? "Appointments"}
           </h3>
           <Input

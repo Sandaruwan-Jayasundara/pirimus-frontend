@@ -22,6 +22,7 @@ const PsychologistCell: React.FC<Props> = ({ appointment }) => {
   return (
     <div className="text-right">
       <Button
+        className="bg-primary/10"
         variant="outline"
         onClick={() => setIsDialogOpen(true)}
         disabled={!psychologist}

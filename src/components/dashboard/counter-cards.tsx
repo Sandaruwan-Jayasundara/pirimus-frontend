@@ -52,7 +52,9 @@ export function Cards({
   useEffect(() => {
     const fetchRoomIncomeCount = async () => {
       try {
-        const result = await getRoomIncomeCountAction(selectedDate);
+        const adjustedDate = new Date(selectedDate);
+        adjustedDate.setDate(adjustedDate.getDate() + 1);
+        const result = await getRoomIncomeCountAction(adjustedDate);
         setRoomIncomeCount(result);
       } catch (error) {
         console.error("Error fetching room income count:", error);
@@ -66,7 +68,9 @@ export function Cards({
   useEffect(() => {
     const fetchPsycologistIncomeCount = async () => {
       try {
-        const result = await getPsychologistCountAction(psychologistDate);
+        const adjustedDate = new Date(psychologistDate);
+        adjustedDate.setDate(adjustedDate.getDate() + 1);
+        const result = await getPsychologistCountAction(adjustedDate);
         setPsycologistIncome(result as number);
       } catch (error) {
         console.error("Error fetching room income count:", error);
@@ -94,7 +98,7 @@ export function Cards({
   return (
     <>
       {/* Total Psychologists Card */}
-      <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
+      <Card className="shadow-md hover:shadow-lg transition-shadow bg-primary/10 duration-300">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-lg font-semibold text-foreground">
             Total Psychologists
@@ -109,7 +113,7 @@ export function Cards({
       </Card>
 
       {/* Active Clients Card */}
-      <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
+      <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 bg-blue-500/10">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-lg font-semibold text-foreground">
             Active Clients
@@ -124,14 +128,14 @@ export function Cards({
       </Card>
 
       {/* Appointments Card with Dropdown */}
-      <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
+      <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 bg-yellow-500/10">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-lg font-semibold text-foreground">
             Appointments
           </CardTitle>
           <div className="flex items-center gap-2">
             <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
-              <SelectTrigger className="w-[120px] border-input text-foreground focus:ring-ring">
+              <SelectTrigger className="w-[120px] border-input text-foreground focus:ring-ring bg-yellow-100">
                 <SelectValue placeholder="Select period" />
               </SelectTrigger>
               <SelectContent>
@@ -151,7 +155,7 @@ export function Cards({
       </Card>
 
       {/* Room Income Status Card */}
-      <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
+      <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 bg-red-500/10">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-lg font-semibold text-foreground">
             Room Income Status
@@ -159,7 +163,7 @@ export function Cards({
           <div className="flex items-center gap-1">
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="outline" className="w-[180px] text-left">
+                <Button variant="outline" className="w-[180px] text-left bg-red-200">
                   {selectedDate ? format(selectedDate, "PPP") : "Pick a date"}
                 </Button>
               </PopoverTrigger>
@@ -188,7 +192,7 @@ export function Cards({
         </CardContent>
       </Card>
 
-      <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
+      <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 	bg-purple-500/10">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-lg font-semibold text-foreground">
             Psychologist Revenue
@@ -196,7 +200,7 @@ export function Cards({
           <div className="flex items-center gap-1">
           <Popover>
               <PopoverTrigger asChild>
-                <Button variant="outline" className="w-[180px] text-left">
+                <Button variant="outline" className="w-[180px] text-left 	bg-purple-200">
                   {psychologistDate ? format(psychologistDate, "PPP") : "Pick a date"}
                 </Button>
               </PopoverTrigger>

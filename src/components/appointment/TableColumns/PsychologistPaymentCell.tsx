@@ -18,6 +18,8 @@ import { Label } from "@/components/ui/label";
 
 import { updatePsychologistPaymentDetailsAction } from "@/api/AppointmentApi";
 import { Appointment, PaymentStatus, PaymentType } from "@/type/appointment";
+import { useAuth } from "@/context/AuthContext";
+import { Role } from "@/type/role";
 // import { updatePsychologistPaymentDetailsAction } from "@/actions"; // adjust this too
 
 type Props = {
@@ -39,6 +41,8 @@ const PsychologistPaymentCell: React.FC<Props> = ({ appointment }) => {
   const [hasChanges, setHasChanges] = useState(false);
   const [error, setError] = useState("");
   const [paymentProportion, setPaymentProportion] = useState("");
+  const { user } = useAuth();
+  const isAdmin = user?.role === Role.ADMIN;
 
   const handleOpenDialog = () => {
     setPaymentStatus(appointment.paymentStatus);
@@ -134,7 +138,7 @@ const PsychologistPaymentCell: React.FC<Props> = ({ appointment }) => {
 
   return (
     <div className="text-right">
-      <Button variant="outline" onClick={handleOpenDialog}>
+      <Button variant="outline" onClick={handleOpenDialog} className="bg-yellow-500/10">
         Payment Information
       </Button>
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -152,17 +156,10 @@ const PsychologistPaymentCell: React.FC<Props> = ({ appointment }) => {
                 Payment Completed ${appointment?.paidAmount?.toFixed(2)}
               </div>
             ) : (
-              // )
 
-              // : appointment?.paymentStatus === PaymentStatus.NO_FEE ? (
-              //   <div
-              //     className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
-              //     role="alert"
-              //   >
-              //     No Fee Applied
-              //   </div>
-
+              (appointment.patient.isAssignByAdmin  && appointment.assignedByAdmin ) || (isAdmin && appointment.patient.isAssignByAdmin  && !appointment.assignedByAdmin )? (
               <>
+
                 <div>
                   <strong>Total Amount:</strong> $
                   {appointment.patient.fee?.toFixed(2)}
@@ -230,8 +227,17 @@ const PsychologistPaymentCell: React.FC<Props> = ({ appointment }) => {
                   </Select>
                 </div>
               </>
+              ):(
+                <div
+                className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                role="alert"
+              >
+                Payment is managed by Psychologist
+              </div>
+              )
             )}
           </div>
+         { (appointment.patient.isAssignByAdmin  && appointment.assignedByAdmin ) || (isAdmin && appointment.patient.isAssignByAdmin  && !appointment.assignedByAdmin )&& (
           <div className="mt-4 text-right space-x-2">
             {hasChanges && paymentStatus === PaymentStatus.COMPLETED ? (
               <>
@@ -257,6 +263,7 @@ const PsychologistPaymentCell: React.FC<Props> = ({ appointment }) => {
               </Button>
             )}
           </div>
+          )}
         </DialogContent>
       </Dialog>
     </div>

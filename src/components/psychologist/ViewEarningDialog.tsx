@@ -62,7 +62,7 @@ const ViewEarningsDialog: React.FC<ViewEarningsDialogProps> = ({psychologistId})
         }
       }}>
         <DialogTrigger asChild>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="bg-yellow-500/10">
             View Earnings
           </Button>
         </DialogTrigger>

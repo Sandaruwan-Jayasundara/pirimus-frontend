@@ -30,6 +30,7 @@ const MessageStatusCell: React.FC<Props> = ({ appointment }) => {
   return (
     <div className="text-right">
       <Button
+        className="bg-green-500/10"
         variant="outline"
         onClick={handleOpenDialog}
         disabled={isLoading}

@@ -75,7 +75,7 @@ const ViewPatientsList: React.FC<ViewPatientsListProps> = ({
       }}
     >
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" className="bg-blue-500/10">
           View Patients
         </Button>
       </DialogTrigger>

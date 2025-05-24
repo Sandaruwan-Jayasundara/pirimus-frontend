@@ -77,30 +77,30 @@ export function PsychologistTable<TData extends Psychologist, TValue>({
   const modifiedColumns: ColumnDef<TData, TValue>[] = columns.map((col) =>
     col.id === "actions"
       ? {
-          ...col,
-          cell: ({ row }) => {
-            const psychologist = row.original;
-            return (
-              <div className="text-right">
-                <div className="flex justify-end space-x-2">
-                  <Trash
-                    size={17}
-                    className="cursor-pointer text-destructive"
-                    onClick={() =>
-                      handleDeletePsychologist(psychologist?.id ?? 0)
-                    }
-                  />
-                </div>
+        ...col,
+        cell: ({ row }) => {
+          const psychologist = row.original;
+          return (
+            <div className="text-right">
+              <div className="flex justify-end space-x-2">
+                <Trash
+                  size={17}
+                  className="cursor-pointer text-destructive"
+                  onClick={() =>
+                    handleDeletePsychologist(psychologist?.id ?? 0)
+                  }
+                />
               </div>
-            );
-          },
-        }
+            </div>
+          );
+        },
+      }
       : col
   );
 
   return (
     <>
-    <hr className="mt-5"/>
+      <hr className="mt-5" />
       <div className="mt-5 md:mt-8">
         <DataTable title={title} columns={modifiedColumns} data={data} />
       </div>
@@ -108,19 +108,19 @@ export function PsychologistTable<TData extends Psychologist, TValue>({
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Confirm Deletion</DialogTitle>
+            <DialogTitle>Silme İşlemini Onayla</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete this psychologist? This action
-              will mark the psychologist as deleted.
+              Bu psikoloğu silmek istediğinizden emin misiniz? Bu işlem, psikoloğu silinmiş olarak işaretleyecektir.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="outline" onClick={handleDeleteDialogClose}>
-              Cancel
-            </Button>
-            <Button variant="destructive" onClick={confirmDelete}>
-              Delete
-            </Button>
+          <Button variant="outline" onClick={handleDeleteDialogClose}>
+  İptal
+</Button>
+<Button variant="destructive" onClick={confirmDelete}>
+  Sil
+</Button>
+
           </DialogFooter>
         </DialogContent>
       </Dialog>

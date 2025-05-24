@@ -21,12 +21,13 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import { CommissionDto } from "@/type/commission";
+import { tr } from 'date-fns/locale';
 
 export const paymentHistoryColumns: ColumnDef<Payment>[] = [
   {
     accessorKey: "paymentDate",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Payment Date" />
+      <DataTableColumnHeader column={column} title="Ödeme Tarihi" />
     ),
     cell: ({ row }) => {
       const paymentDate = row.original.paymentDate;
@@ -36,7 +37,7 @@ export const paymentHistoryColumns: ColumnDef<Payment>[] = [
   {
     accessorKey: "appointmentTime",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Appointment Time" />
+      <DataTableColumnHeader column={column} title="Randevu Saati" />
     ),
     cell: ({ row }) => {
       const appointmentTime = row.original.appointmentStartTime;
@@ -48,28 +49,28 @@ export const paymentHistoryColumns: ColumnDef<Payment>[] = [
   {
     accessorKey: "patientName",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Patient Name" />
+      <DataTableColumnHeader column={column} title="Hasta Adı" />
     ),
     cell: ({ row }) => row.original.patientName || "N/A",
   },
   {
     accessorKey: "psychologistName",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Psychologist Name" />
+      <DataTableColumnHeader column={column} title="Psikolog Adı" />
     ),
     cell: ({ row }) => row.original.psychologistName || "N/A",
   },
   {
     accessorKey: "amount",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Amount" />
+      <DataTableColumnHeader column={column} title="Tutar" />
     ),
     cell: ({ row }) => `₺${row.original.amount?.toFixed(2) || "0.00"}`,
   },
   {
     accessorKey: "paymentType",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Payment Type" />
+      <DataTableColumnHeader column={column} title="Ödeme Türü" />
     ),
     cell: ({ row }) => row.original.paymentType || "N/A",
   },
@@ -119,32 +120,32 @@ export function PaymentHistoryTable() {
     setRefresh(!refresh);
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-
+  if (loading) return <div>Yükleniyor...</div>;
+  if (error) return <div>Hata: {error}</div>;
+  
   return (
     <>
       <div className="p-6 mt-5">
         <Tabs defaultValue="pending" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger onClick={() => refreshTable()} value="pending">
-              Pending List
+              Bekleyen Liste
             </TabsTrigger>
             <TabsTrigger onClick={() => refreshTable()} value="paid">
-              Paid
+              Ödenmiş
             </TabsTrigger>
           </TabsList>
 
           <TabsContent value="pending">
             <CommissionTable
-              title={"Pending Room Commissions"}
+              title={"Bekleyen Oda Komisyonları"}
               data={pendingCommission}
               tab="pending"
             />
           </TabsContent>
           <TabsContent value="paid">
             <CommissionTable
-              title={"Paid Room Commissions"}
+              title={"Ödenen Oda Komisyonları"}
               data={paidCommission}
               tab="paid"
             />
@@ -162,6 +163,7 @@ export function PaymentHistoryTable() {
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0">
               <Calendar
+                locale={tr}
                 mode="single"
                 selected={selectedDate}
                 onSelect={(day) => day && setSelectedDate(day)}
@@ -171,7 +173,7 @@ export function PaymentHistoryTable() {
         </div>
 
         <DataTable
-          title={"Psychologist Payments"}
+          title={"Psikolog Ödemeleri"}
           columns={
             paymentHistoryColumns as ColumnDef<{
               startTime?: string;

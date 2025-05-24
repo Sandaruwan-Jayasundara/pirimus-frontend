@@ -20,12 +20,13 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import { CommissionDto } from "@/type/commission";
+import { tr } from 'date-fns/locale';
 
 export const paymentRecordColumns: ColumnDef<Payment>[] = [
   {
     accessorKey: "paymentDate",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Payment Date" />
+      <DataTableColumnHeader column={column} title="Ödeme Tarihi" />
     ),
     cell: ({ row }) => {
       const paymentDate = row.original.paymentDate;
@@ -35,7 +36,7 @@ export const paymentRecordColumns: ColumnDef<Payment>[] = [
   {
     accessorKey: "appointmentTime",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Appointment Time" />
+      <DataTableColumnHeader column={column} title="Randevu Zamanı" />
     ),
     cell: ({ row }) => {
       const appointmentTime = row.original.appointmentStartTime;
@@ -47,28 +48,28 @@ export const paymentRecordColumns: ColumnDef<Payment>[] = [
   {
     accessorKey: "patientName",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Patient Name" />
+      <DataTableColumnHeader column={column} title="Hasta Adı" />
     ),
     cell: ({ row }) => row.original.patientName || "N/A",
   },
   {
     accessorKey: "psychologistName",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Psychologist Name" />
+      <DataTableColumnHeader column={column} title="Psikolog Adı" />
     ),
     cell: ({ row }) => row.original.psychologistName || "N/A",
   },
   {
     accessorKey: "amount",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Amount" />
+      <DataTableColumnHeader column={column} title="Miktar" />
     ),
     cell: ({ row }) => `₺${row.original.amount?.toFixed(2) || "0.00"}`,
   },
   {
     accessorKey: "paymentType",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Payment Type" />
+      <DataTableColumnHeader column={column} title=" Ödeme Türü" />
     ),
     cell: ({ row }) => row.original.paymentType || "N/A",
   },
@@ -102,7 +103,7 @@ export function PaymentRecordTable() {
         setPayments(data as Payment[]);
       } catch (err) {
         setError(
-          err instanceof Error ? err.message : "Failed to fetch payment history"
+          err instanceof Error ? err.message : "Ödeme geçmişi alınamadı"
         );
       } finally {
         setLoading(false);
@@ -111,7 +112,7 @@ export function PaymentRecordTable() {
     fetchPayments(selectedDate);
   }, [selectedDate]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div>Yükleniyor...</div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
@@ -126,6 +127,7 @@ export function PaymentRecordTable() {
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0">
               <Calendar
+                locale={tr}
                 mode="single"
                 selected={selectedDate}
                 onSelect={(day) => day && setSelectedDate(day)}
@@ -134,25 +136,21 @@ export function PaymentRecordTable() {
           </Popover>
         </div>
         <DataTable
-          title={"Psychologist Earning"}
-
+          title={"Psikolog Kazancı"}
           columns={
             paymentRecordColumns as ColumnDef<{
               startTime?: string;
               status?: string;
             }>[]
           }
-
           data={payments as { startTime?: string; status?: string }[]}
-
-
           showAddButton={false}
         />
       </div>
       <hr />
       <div className="p-6 ">
         <CommissionTable
-          title={"Room Payments"}
+          title={"Oda Ödemeleri"}
           data={roomCommission}
           tab="pending"
         />

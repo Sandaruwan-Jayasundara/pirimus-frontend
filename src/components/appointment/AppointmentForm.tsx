@@ -59,6 +59,7 @@ import {
 import { useAuth } from "@/context/AuthContext";
 import { Role } from "@/type/role";
 import { Psychologist } from "@/type/psychologist";
+import { tr } from 'date-fns/locale';
 
 interface AppointmentFormProps extends React.ComponentPropsWithoutRef<"div"> {
   onAppointmentAdded?: (appointment: Appointment) => void;
@@ -360,7 +361,7 @@ export function AppointmentForm({
       } catch (err) {
         setError(
           "Failed to fetch available rooms: " +
-            (err instanceof Error ? err.message : String(err))
+          (err instanceof Error ? err.message : String(err))
         );
         setFilteredRooms([]);
       }
@@ -436,8 +437,8 @@ export function AppointmentForm({
           paymentStatus === PaymentStatus.PENDING
             ? Number(selectedPatient?.fee)
             : paymentStatus === PaymentStatus.COMPLETED
-            ? 0
-            : Number(0),
+              ? 0
+              : Number(0),
         patientPayment: {
           paymentStatus: paymentStatus as PaymentStatus,
           totalFee: Number(selectedPatient?.patientFee),
@@ -446,8 +447,8 @@ export function AppointmentForm({
             paymentStatus === PaymentStatus.PENDING
               ? Number(selectedPatient?.patientFee)
               : paymentStatus === PaymentStatus.COMPLETED
-              ? 0
-              : Number(0),
+                ? 0
+                : Number(0),
         },
       };
       const response = appointmentToEdit
@@ -503,21 +504,33 @@ export function AppointmentForm({
   const getFilteredStatuses = () => {
     return [PaymentStatus.PENDING, PaymentStatus.COMPLETED];
   };
+  
+  const statusLabels = (status: string) => {
+    const labels: Record<string, string> = {
+      PENDING: "Beklemede",
+      COMPLETED: "Tamamlandı",
+    };
+  
+    return labels[status] ?? status;
+  };
+  
+  
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <DialogContent>
         {appointmentToEdit?.assignedByAdmin &&
-        !isAdmin &&
-        appointmentToEdit &&
-        appointmentToEdit?.patient?.isAssignByAdmin ? (
+          !isAdmin &&
+          appointmentToEdit &&
+          appointmentToEdit?.patient?.isAssignByAdmin ? (
           <p className="text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 p-3">
-            Cannot edit Appointment details
+            Randevu detayları düzenlenemez
           </p>
         ) : (
           <>
             <DialogHeader>
               <DialogTitle>
-                {appointmentToEdit ? "Edit Appointment" : "Add New Appointment"}
+                {appointmentToEdit ? "Randevuyu Düzenle" : "Yeni Randevu Ekle"}
+
               </DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit}>
@@ -532,7 +545,7 @@ export function AppointmentForm({
                 )}
                 {/* Patient Selection */}
                 <div className="grid gap-2">
-                  <Label htmlFor="patient">Patient</Label>
+                  <Label htmlFor="patient">Hasta</Label>
                   <Select
                     value={patientId === "" ? undefined : String(patientId)}
                     onValueChange={(value) =>
@@ -541,17 +554,17 @@ export function AppointmentForm({
                     disabled={isLoading}
                   >
                     <SelectTrigger id="patient" className="w-full">
-                      <SelectValue placeholder="Select a patient" />
+                      <SelectValue placeholder="Hastaları ara" />
                     </SelectTrigger>
                     <SelectContent>
                       <Command shouldFilter={false}>
                         <CommandInput
-                          placeholder="Search patients..."
+                          placeholder="Hastaları ara..."
                           onValueChange={handleSearchChange}
                         />
                         <CommandList>
                           {patientRecord.length <= 0 && search !== "" ? (
-                            <CommandEmpty>No results found.</CommandEmpty>
+                            <CommandEmpty>Sonuç bulunamadı.</CommandEmpty>
                           ) : (
                             <CommandGroup>
                               {patientRecord.map((patient) => (
@@ -571,7 +584,7 @@ export function AppointmentForm({
                 </div>
                 {/* Date Selection */}
                 <div className="grid gap-2">
-                  <Label htmlFor="date">Date</Label>
+                  <Label htmlFor="date">Tarih</Label>
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button
@@ -583,11 +596,12 @@ export function AppointmentForm({
                         disabled={isLoading || patientId === ""}
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
-                        {date ? format(date, "PPP") : <span>Pick a date</span>}
+                        {date ? format(date, "PPP") : <span>Bir tarih seçin</span>}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
+                      locale={tr}
                         mode="single"
                         selected={date}
                         onSelect={(newDate) => setDate(newDate)}
@@ -611,7 +625,7 @@ export function AppointmentForm({
                 </div>
                 {/* Time Slot Selection */}
                 <div className="grid gap-2">
-                  <Label htmlFor="time">Time Slot</Label>
+                  <Label htmlFor="time">Zaman Dilimi</Label>
                   <Select
                     value={time}
                     onValueChange={setTime}
@@ -620,7 +634,7 @@ export function AppointmentForm({
                     }
                   >
                     <SelectTrigger id="time" className="w-full">
-                      <SelectValue placeholder="Select a time slot" />
+                      <SelectValue placeholder="Bir zaman dilimi seçin" />
                     </SelectTrigger>
                     <SelectContent>
                       {(appointmentToEdit
@@ -635,13 +649,13 @@ export function AppointmentForm({
                   </Select>
                   {date && availableTimeSlots.length === 0 && (
                     <p className="text-sm text-muted-foreground">
-                      No available time slots for this day.
+                      Bu gün için uygun zaman dilimi yok.
                     </p>
                   )}
                 </div>
                 {/* Branch Selection */}
                 <div className="grid gap-2">
-                  <Label htmlFor="branch">Branch</Label>
+                  <Label htmlFor="branch">Şube</Label>
                   <Select
                     value={branchId === "" ? undefined : String(branchId)}
                     onValueChange={(value) =>
@@ -650,7 +664,7 @@ export function AppointmentForm({
                     disabled={isLoading || branches.length === 0}
                   >
                     <SelectTrigger id="branch" className="w-full">
-                      <SelectValue placeholder="Select a branch" />
+                      <SelectValue placeholder="Bir şube seçin" />
                     </SelectTrigger>
                     <SelectContent>
                       {branches.map((branch) => (
@@ -663,7 +677,7 @@ export function AppointmentForm({
                 </div>
                 {/* Room Selection */}
                 <div className="grid gap-2">
-                  <Label htmlFor="room">Room</Label>
+                  <Label htmlFor="room">Oda</Label>
                   <Select
                     value={roomName}
                     onValueChange={setRoomName}
@@ -672,7 +686,7 @@ export function AppointmentForm({
                     }
                   >
                     <SelectTrigger id="room" className="w-full">
-                      <SelectValue placeholder="Select a room" />
+                      <SelectValue placeholder="Bir oda seçin" />
                     </SelectTrigger>
                     <SelectContent>
                       {filteredRooms.map((room) => (
@@ -685,14 +699,14 @@ export function AppointmentForm({
                   </Select>
                   {branchId && filteredRooms.length === 0 && (
                     <p className="text-sm text-muted-foreground">
-                      No rooms available for this branch at the selected time.
+                      Seçilen zamanda bu şube için uygun oda bulunmamaktadır.
                     </p>
                   )}
                 </div>
 
                 {/* Payment Status */}
                 <div className="grid gap-2">
-                  <Label htmlFor="paymentStatus">Payment Status</Label>
+                  <Label htmlFor="paymentStatus">Ödeme Durumu</Label>
                   <Select
                     value={paymentStatus}
                     onValueChange={(value) =>
@@ -701,12 +715,12 @@ export function AppointmentForm({
                     disabled={isLoading}
                   >
                     <SelectTrigger id="paymentStatus" className="w-full">
-                      <SelectValue placeholder="Select payment status" />
+                      <SelectValue placeholder="Ödeme durumunu seçin" />
                     </SelectTrigger>
                     <SelectContent>
                       {getFilteredStatuses().map((statusOption) => (
                         <SelectItem key={statusOption} value={statusOption}>
-                          {statusOption}
+                       {statusLabels(statusOption)}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -715,7 +729,7 @@ export function AppointmentForm({
                 {/* Paid Amount (Conditional) */}
                 {paymentStatus === PaymentStatus.PARTIALLY_PAID && (
                   <div className="grid gap-2">
-                    <Label htmlFor="paidAmount">Paid Amount</Label>
+                    <Label htmlFor="paidAmount">Ödenen Tutar</Label>
                     <Input
                       id="paidAmount"
                       type="number"
@@ -729,7 +743,7 @@ export function AppointmentForm({
                       min="0"
                       step="0.01"
                       max={totalFee as number}
-                      placeholder="Enter paid amount (defaults to 0)"
+                      placeholder="Ödenen tutarı girin (varsayılan 0)"
                       className="w-full"
                     />
                   </div>
@@ -743,16 +757,16 @@ export function AppointmentForm({
                   onClick={handleCancel}
                   disabled={isLoading}
                 >
-                  Cancel
+                  İptal Et
                 </Button>
                 <Button type="submit" disabled={isLoading}>
                   {isLoading
                     ? appointmentToEdit
-                      ? "Updating Appointment..."
-                      : "Adding Appointment..."
+                      ? "Randevu Güncelleniyor..."
+                      : "Randevu Ekleniyor..."
                     : appointmentToEdit
-                    ? "Update Appointment"
-                    : "Add Appointment"}
+                      ? "Randevuyu Güncelle"
+                      : "Randevu Ekle"}
                 </Button>
               </DialogFooter>
             </form>

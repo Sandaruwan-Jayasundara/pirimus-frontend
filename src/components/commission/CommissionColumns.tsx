@@ -8,11 +8,11 @@ import {format} from "date-fns";
 const baseColumns: ColumnDef<CommissionDto>[] = [
   {
     accessorKey: "commissionId", // Corrected to accessorKey
-    header: ({column}) => <DataTableColumnHeader column={column} title="ID"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Kimlik"/>,
   },
   {
     id: "appointmentTime", // Custom column, so use `id`
-    header: ({column}) => <DataTableColumnHeader column={column} title="Appointment Time"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Randevu Zamanı"/>,
     cell: ({row}) => {
       const startTime = row.original.appointmentStartTime
           ? format(new Date(row.original.appointmentStartTime), "PPP HH:mm")
@@ -25,16 +25,16 @@ const baseColumns: ColumnDef<CommissionDto>[] = [
   },
   {
     accessorKey: "psychologistName",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Psychologist Name"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Psikolog Adı"/>,
   },
   {
     accessorKey: "commissionAmount",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Commission Amount"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Komisyon Miktarı"/>,
     cell: ({row}) => `₺${row.original.commissionAmount.toFixed(2)}`,
   },
   {
     accessorKey: "patientName",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Patient Name"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Hasta Adı"/>,
   },
 ];
 
@@ -42,7 +42,7 @@ export const pendingColumns: ColumnDef<CommissionDto>[] = [
   ...baseColumns,
   {
     id: "status",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Status"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Durum"/>,
     // Cell will be overridden in CommissionTable.tsx
     cell: ({row}) => row.original.status,
   },
@@ -52,7 +52,7 @@ export const paidColumns: ColumnDef<CommissionDto>[] = [
   ...baseColumns,
   {
     id: "status",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Status"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Durum"/>,
     cell: ({row}) => row.original.status,
   },
 ];

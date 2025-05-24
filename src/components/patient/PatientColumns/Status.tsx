@@ -40,9 +40,9 @@ const Status: React.FC<Props> = ({ patient }) => {
               <SelectValue placeholder="Select status" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value={PatientStatus.ACTIVE}>Active</SelectItem>
-              <SelectItem value={PatientStatus.INACTIVE}>InActive</SelectItem>
-              <SelectItem value={PatientStatus.ON_BREAK}>OnBreak</SelectItem>
+            <SelectItem value={PatientStatus.ACTIVE}>Aktif</SelectItem>
+            <SelectItem value={PatientStatus.INACTIVE}>Pasif</SelectItem>
+            <SelectItem value={PatientStatus.ON_BREAK}>Ara Verdi</SelectItem>
             </SelectContent>
           </Select>
         </div>

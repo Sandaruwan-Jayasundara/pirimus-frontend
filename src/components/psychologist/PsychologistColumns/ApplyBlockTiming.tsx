@@ -29,7 +29,7 @@ const ApplyBlockTiming: React.FC<Props> = ({ psychologist }) => {
                       router.refresh();
                     } catch (error)
                     {
-                      console.error("Error updating apply block timing:", error);
+                      console.error("Blok zamanlaması güncellenirken hata oluştu:", error);
                     }
                   }}
               >
@@ -37,8 +37,8 @@ const ApplyBlockTiming: React.FC<Props> = ({ psychologist }) => {
                   <SelectValue placeholder="Select option"/>
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Yes">Yes</SelectItem>
-                  <SelectItem value="No">No</SelectItem>
+                <SelectItem value="Yes">Evet</SelectItem>
+                <SelectItem value="No">Hayır</SelectItem>
                 </SelectContent>
               </Select>
             </div>

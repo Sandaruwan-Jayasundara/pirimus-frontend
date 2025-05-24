@@ -36,86 +36,86 @@ import { useAuth } from "@/context/AuthContext";
 // Define menu items with roles that can access them
 const menuItems = [
   {
-    title: "Admin Dashboard",
+    title: "Yönetici Paneli",
     url: "/dashboard",
     icon: Home,
     roles: ["ADMIN"], // Accessible by both roles
   },
   {
-    title: "Psychologist Dashboard",
+    title: "Psikolog Paneli",
     url: "/psychologist-dashboard",
     icon: Home,
     roles: ["PSYCHOLOGIST"], // Accessible by both roles
   },
   {
-    title: "Psychologist Management",
+    title: "Psikolog Yönetimi",
     url: "/psychologist",
     icon: Stethoscope,
     roles: ["ADMIN"], // Only ADMIN
   },
   {
-    title: "Appointment Management",
+    title: "Randevu Yönetimi",
     url: "/appointment",
     icon: Calendar,
     roles: ["ADMIN", "PSYCHOLOGIST"],
   },
   {
-    title: "Completed Appointment",
+    title: "Tamamlanan Randevu",
     url: "/completed-appointment",
     icon: CheckCircle,
     roles: ["ADMIN"],
   },
   {
-    title: "Patient Management",
+    title: "Hasta Yönetimi",
     url: "/patient",
     icon: Users,
     roles: ["PSYCHOLOGIST"],
   },
   {
-    title: "Patient Management",
+    title: "Hasta Yönetimi",
     url: "/admin-patient",
     icon: Users,
     roles: ["ADMIN"],
   },
   {
-    title: "Room Management",
+    title: "Hasta Yönetimi",
     url: "/room",
     icon: DoorClosed,
     roles: ["ADMIN"],
   },
   {
-    title: "Room Appointment",
+    title: "Oda Randevusu",
     url: "/room-appointment",
     icon: DoorOpen,
     roles: ["PSYCHOLOGIST"],
   },
   {
-    title: "Branch Management",
+    title: "Şube Yönetimi",
     url: "/branch",
     icon: Building,
     roles: ["ADMIN"], // Only ADMIN
   },
   {
-    title: "Working Hours",
+    title: "Çalışma Saatleri",
     url: "/workingHours",
     icon: Hourglass,
     roles: ["PSYCHOLOGIST"], // Only PSYCHOLOGIST
   },
   {
-    title: "Blocked Timing",
+    title: "Engellenmiş Zaman Dilimi",
     url: "/blockedTiming",
     icon: TimerOff,
     roles: ["ADMIN"], // Only PSYCHOLOGIST
   },
   ,
   {
-    title: "Payment Records",
+    title: "Ödeme Kayıtları",
     url: "/payment-records",
     icon: List,
     roles: ["PSYCHOLOGIST"], // Only PSYCHOLOGIST
   },
   {
-    title: "Payment Record",
+    title: "Ödeme Kaydı",
     url: "/commission-list",
     icon: ClipboardList,
     roles: ["ADMIN"],
@@ -147,7 +147,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     >
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+          <SidebarGroupLabel>Uygulama</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {filteredItems?.map((item) => {

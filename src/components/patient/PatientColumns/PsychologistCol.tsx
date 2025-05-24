@@ -27,27 +27,27 @@ const PsychologistCol: React.FC<Props> = ({ patient }) => {
             onClick={() => setIsDialogOpen(true)}
             disabled={!psychologist}
           >
-            View Psychologist
+           Psikologu Görüntüle
           </Button>
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Psychologist Information</DialogTitle>
+              <DialogTitle>Psikolog Bilgileri</DialogTitle>
               </DialogHeader>
               {psychologist ? (
                 <div className="space-y-4">
                   <div>
-                    <strong>Name:</strong> {psychologist.firstName}{" "}
+                    <strong>Ad:</strong> {psychologist.firstName}{" "}
                     {psychologist.lastName}
                   </div>
                   <div>
-                    <strong>Email:</strong> {psychologist.email}
+                    <strong>E-posta:</strong> {psychologist.email}
                   </div>
                   <div>
-                    <strong>Phone:</strong> {psychologist.phoneNumber}
+                    <strong>Telefon:</strong> {psychologist.phoneNumber}
                   </div>
                   <div>
-                    <strong>Fee:</strong> {patient?.fee}
+                    <strong>Ücret:</strong> {patient?.fee}
                   </div>
                 </div>
               ) : (
@@ -58,7 +58,7 @@ const PsychologistCol: React.FC<Props> = ({ patient }) => {
                   variant="outline"
                   onClick={() => setIsDialogOpen(false)}
                 >
-                  Close
+                  Kapat
                 </Button>
               </div>
             </DialogContent>

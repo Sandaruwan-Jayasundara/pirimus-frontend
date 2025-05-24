@@ -27,11 +27,11 @@ export function MessageStatusDialog({
       <Dialog open={isOpen} onOpenChange={onOpenChange}>
         <DialogContent className="max-h-[80vh] flex flex-col">
           <DialogHeader>
-            <DialogTitle>Message Status for Appointment #{appointment.id}</DialogTitle>
+            <DialogTitle>Randevu İçin Mesaj Durumu #{appointment.id}</DialogTitle>
           </DialogHeader>
           <div className="flex-1 overflow-y-auto space-y-4">
             <div>
-              <h3 className="font-semibold">Client Messages</h3>
+              <h3 className="font-semibold">Danışan Mesajları</h3>
               {messageLogs
                   .filter((log) => log.recipient === appointment.patient?.phone)
                   .map((log) => (
@@ -49,7 +49,7 @@ export function MessageStatusDialog({
               )}
             </div>
             <div>
-              <h3 className="font-semibold">Psychologist Messages</h3>
+              <h3 className="font-semibold">Psikolog Mesajları</h3>
               {messageLogs
                   .filter((log) => log.recipient === appointment.psychologist?.phoneNumber)
                   .map((log) => (
@@ -69,7 +69,7 @@ export function MessageStatusDialog({
           </div>
           <div className="mt-4 text-right">
             <Button variant="outline" onClick={() => onOpenChange(false)}>
-              Close
+            Kapat
             </Button>
           </div>
         </DialogContent>

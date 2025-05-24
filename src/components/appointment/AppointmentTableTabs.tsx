@@ -25,7 +25,7 @@ export function AppointmentTableTabs({
                data-[state=active]:text-white 
                hover:bg-secondary"
           >
-            Admin Appointments
+            Yönetici Randevuları
           </TabsTrigger>
 
           <TabsTrigger
@@ -35,13 +35,13 @@ export function AppointmentTableTabs({
                data-[state=active]:text-white 
                hover:bg-secondary"
           >
-            Psychologist Appointments
+            Psikolog Randevuları
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="admin">
           <AppointmentTable
-            title="Admin Appointments"
+            title="Yönetici Randevuları"
             columns={columns}
             data={adminAppointments}
             showAddButton={true}
@@ -51,7 +51,7 @@ export function AppointmentTableTabs({
         </TabsContent>
         <TabsContent value="psychologist">
           <AppointmentTable
-            title="Psychologist Appointments"
+            title="Psikolog Randevuları"
             columns={columns}
             data={nonAdminAppointments}
             showAddButton={true}

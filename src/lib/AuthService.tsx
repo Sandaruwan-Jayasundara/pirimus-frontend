@@ -48,12 +48,12 @@ export const AuthService = {
 
     if (!response.ok) {
       if (response.status === 401) {
-        throw new Error("Invalid email or password");
+        throw new Error("Geçersiz e-posta veya şifre");
       } else if (response.status === 423) {
-        throw new Error("Under Reviewing. Your account is not active.");
+        throw new Error("İnceleniyor. Hesabınız aktif değil.");
       } else {
-        throw new Error("Login failed. Please try again later.");
-      }
+        throw new Error("Giriş yapılamadı. Lütfen daha sonra tekrar deneyin.");
+      }      
     }
 
     return response.json();
@@ -71,21 +71,18 @@ export const AuthService = {
     if (!response.ok) {
       if (response.status === 400) {
         console.log("400", response.status);
-
-        throw new Error("Invalid user data. Please check your inputs.");
+        throw new Error("Geçersiz kullanıcı verisi. Lütfen girdilerinizi kontrol edin.");
       } else if (response.status === 403) {
         console.log("403", response.status);
-
         throw new Error(
-          "This account has been deleted. Please contact support."
+          "Bu hesap silinmiş. Lütfen destek ile iletişime geçin."
         );
       } else if (response.status === 404) {
         console.log("404", response.status);
-        throw new Error("No account found with this email. Please sign up.");
+        throw new Error("Bu e-posta ile hesap bulunamadı. Lütfen kaydolun.");
       } else {
         console.log("else", response.status);
-
-        throw new Error("Login Failed. Please try again later.");
+        throw new Error("Giriş Başarısız. Lütfen daha sonra tekrar deneyin.");
       }
     }
 

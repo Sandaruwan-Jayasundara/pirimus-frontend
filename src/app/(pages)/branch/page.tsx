@@ -13,7 +13,7 @@ export default async function BranchPage() {
       <ProtectedRoute allowedRoles={[Role.ADMIN]}>
       <div>
         <BranchTable
-            title="Branch Management"
+            title="Şube Yönetimi"
             columns={columns}
             data={branches}
         />

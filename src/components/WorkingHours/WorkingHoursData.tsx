@@ -46,11 +46,11 @@ export default function WorkingHoursData({
     <>
       <Card className="w-full border rounded-lg shadow-md">
         <CardHeader className="flex justify-between items-center">
-          <h2 className="text-2xl font-bold">Working Days</h2>
+          <h2 className="text-2xl font-bold">Çalışma Günleri</h2>
           <Button className="ml-auto" onClick={() => setIsDialogOpen(true)}>
             {Array.isArray(data?.days) && data.days.length > 0
-              ? "Edit Working Days"
-              : "Set Working Days"}
+              ? "Çalışma Günlerini Düzenle"
+              : "Çalışma Günlerini Belirle"}
           </Button>
         </CardHeader>
 
@@ -76,14 +76,14 @@ export default function WorkingHoursData({
                       </div>
                     ))
                   ) : (
-                    <p>No slots available</p>
+                    <p>Uygun slot yok</p>
                   )}
                 </div>
               ))}
             </div>
           ) : (
             <p className="text-center text-muted-foreground">
-              No working days set. Click `Set Working Days` to add them.
+              Çalışma günleri ayarlanmamış. Eklemek için `Çalışma Günlerini Belirle` tıklayın.
             </p>
           )}
         </CardContent>

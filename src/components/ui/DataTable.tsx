@@ -73,9 +73,9 @@ export function DataTable<TData extends { startTime?: string; status?: string },
                   onChange={(e) => setStatusFilter(e.target.value)}
                   className="p-2 border rounded w-full sm:w-auto"
                 >
-                  <option value="Today">Today</option>
-                  <option value="All">All</option>
-                  <option value="Schedule">Schedule</option>
+                  <option value="Today">Bugün</option>
+                  <option value="All">Tümü</option>
+                  <option value="Schedule">Program</option>
                 </select>
               </div>
             )}
@@ -86,7 +86,7 @@ export function DataTable<TData extends { startTime?: string; status?: string },
                 onClick={onAddClick}
                 className="flex items-center gap-2 w-full sm:w-auto"
               >
-                <Plus className="h-5 w-5 text-primary" /> Add
+                <Plus className="h-5 w-5 text-primary" /> Ekle
               </Button>
             )}
           </div>
@@ -103,9 +103,9 @@ export function DataTable<TData extends { startTime?: string; status?: string },
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                       </TableHead>
                     ))}
                   </TableRow>
@@ -183,7 +183,7 @@ export function DataTable<TData extends { startTime?: string; status?: string },
                       colSpan={columns.length}
                       className="h-24 text-center text-muted-foreground text-xs sm:text-sm"
                     >
-                      No results.
+                    Sonuç bulunamadı.
                     </TableCell>
                   </TableRow>
                 )}

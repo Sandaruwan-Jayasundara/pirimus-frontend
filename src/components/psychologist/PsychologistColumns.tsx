@@ -11,19 +11,19 @@ import ApplyBlockTiming from "./PsychologistColumns/ApplyBlockTiming";
 export const columns: ColumnDef<Psychologist>[] = [
   {
     accessorKey: "firstName",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Name"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Ad"/>,
   },
   {
     accessorKey: "lastName",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Surname"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Soyad"/>,
   },
   {
     accessorKey: "email",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Email"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="E-posta"/>,
   },
   {
     accessorKey: "phoneNumber",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Phone"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Telefon"/>,
   },
   {
     accessorKey: "workingHours",
@@ -39,18 +39,18 @@ export const columns: ColumnDef<Psychologist>[] = [
   },
   {
     accessorKey: "status",
-    header: () => <div className="text-right">Status</div>,
+    header: () => <div className="text-right">Durum</div>,
     cell: ({ row }) => <Status psychologist={row.original} />,
   },
   {
     accessorKey: "applyBlockTiming",
-    header: () => <div className="text-right">Apply Block Time</div>,
+    header: () => <div className="text-right">Çalışma Saatleri</div>,
     cell: ({ row }) => <ApplyBlockTiming psychologist={row.original} />,
 
   },
   {
     accessorKey: "earnings",
-    header: () => <div className="text-right">Earnings</div>,
+    header: () => <div className="text-right">Kazançlar</div>,
     cell: ({row}) => {
       const psychologist = row.original;
       return (
@@ -62,7 +62,7 @@ export const columns: ColumnDef<Psychologist>[] = [
   },
   {
     accessorKey: "patients",
-    header: () => <div className="text-right">Patients</div>,
+    header: () => <div className="text-right">Hastalar</div>,
     cell: ({row}) => {
       const psychologist = row.original;
       return (
@@ -74,6 +74,6 @@ export const columns: ColumnDef<Psychologist>[] = [
   },
   {
     id: "actions",
-    header: () => <div className="text-right">Actions</div>,
+    header: () => <div className="text-right">İşlemler</div>,
   },
 ];

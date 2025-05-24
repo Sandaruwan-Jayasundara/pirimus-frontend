@@ -14,7 +14,7 @@ export default async function Room() {
       <ProtectedRoute allowedRoles={[Role.ADMIN]}>
 
       <div className="container mx-auto py-10">
-        <RoomTable title="Rooms" columns={columns} data={rooms} branches={branches}/>
+        <RoomTable title="Odalar" columns={columns} data={rooms} branches={branches}/>
       </div>
       </ProtectedRoute>
   );

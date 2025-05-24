@@ -99,7 +99,7 @@ export function CompletedTable<TData extends Appointment>({
           </h3>
           <Input
             type="text"
-            placeholder="Search appointments..."
+            placeholder="Randevuları ara..."
             className="w-full sm:w-[300px]"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -116,9 +116,9 @@ export function CompletedTable<TData extends Appointment>({
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                       </TableHead>
                     ))}
                   </TableRow>
@@ -148,7 +148,7 @@ export function CompletedTable<TData extends Appointment>({
                       colSpan={columns.length}
                       className="h-24 text-center text-muted-foreground"
                     >
-                      No results.
+                      Sonuç bulunamadı.
                     </TableCell>
                   </TableRow>
                 )}

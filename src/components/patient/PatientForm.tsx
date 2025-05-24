@@ -70,7 +70,7 @@ export function PatientForm({
       try {
         const data = await searchPsychologist(search);
         setPsychologists(data);
-      } catch{
+      } catch {
         setPsychologists([]);
       }
     };
@@ -113,8 +113,8 @@ export function PatientForm({
         ...(isAdmin && psychologistId
           ? { psychologist: psychologists.find((p) => p.id === psychologistId) }
           : patientToEdit?.psychologist
-          ? { psychologist: patientToEdit.psychologist }
-          : {}),
+            ? { psychologist: patientToEdit.psychologist }
+            : {}),
         // Only include clientNotes if not admin
         ...(!isAdmin ? { clientNotes } : {}),
       };
@@ -171,7 +171,7 @@ export function PatientForm({
             <>
               <DialogHeader>
                 <DialogTitle>
-                  {patientToEdit ? "Edit Patient" : "Add New Patient"}
+                  {patientToEdit ? "Hasta Düzenle" : "Yeni Hasta Ekle"}
                 </DialogTitle>
               </DialogHeader>
               <form onSubmit={handleSubmit}>
@@ -182,11 +182,11 @@ export function PatientForm({
                     </Alert>
                   )}
                   <div className="grid gap-2">
-                    <Label htmlFor="firstName">First Name</Label>
+                    <Label htmlFor="firstName">Ad</Label>
                     <Input
                       id="firstName"
                       type="text"
-                      placeholder="Enter first name"
+                      placeholder="Adınızı girin"
                       required
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
@@ -194,11 +194,11 @@ export function PatientForm({
                     />
                   </div>
                   <div className="grid gap-2">
-                    <Label htmlFor="lastName">Last Name</Label>
+                    <Label htmlFor="lastName">Soyad</Label>
                     <Input
                       id="lastName"
                       type="text"
-                      placeholder="Enter last name"
+                      placeholder="Soyadınızı girin"
                       required
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
@@ -206,11 +206,11 @@ export function PatientForm({
                     />
                   </div>
                   <div className="grid gap-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email">E-posta</Label>
                     <Input
                       id="email"
                       type="email"
-                      placeholder="Enter email"
+                      placeholder="E-posta adresinizi girin"
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -218,7 +218,7 @@ export function PatientForm({
                     />
                   </div>
                   <div className="grid gap-2">
-                    <Label htmlFor="phone">Phone</Label>
+                    <Label htmlFor="phone">Telefon</Label>
                     <Input
                       id="phone"
                       type="tel"
@@ -238,11 +238,11 @@ export function PatientForm({
                   {!isAdmin && (
                     <div className="grid gap-2">
                       <Label htmlFor="clientNotes">
-                        Client Notes (Optional)
+                        Danışan Notları (İsteğe bağlı)
                       </Label>
                       <Textarea
                         id="clientNotes"
-                        placeholder="Enter client notes"
+                        placeholder="Danışan notlarını girin"
                         value={clientNotes}
                         onChange={(e) => setClientNotes(e.target.value)}
                         disabled={isLoading}
@@ -253,7 +253,7 @@ export function PatientForm({
                   )}
                   {isAdmin && (
                     <div className="grid gap-2">
-                      <Label htmlFor="psychologist">Psychologist</Label>
+                      <Label htmlFor="psychologist">Psikolog</Label>
                       <Select
                         value={
                           psychologistId === ""
@@ -266,17 +266,17 @@ export function PatientForm({
                         disabled={isLoading}
                       >
                         <SelectTrigger id="patient" className="w-full">
-                          <SelectValue placeholder="Select a patient" />
+                          <SelectValue placeholder="Bir hasta seçin" />
                         </SelectTrigger>
                         <SelectContent>
                           <Command shouldFilter={false}>
                             <CommandInput
-                              placeholder="Search psychologists..."
+                              placeholder="Psikologları ara..."
                               onValueChange={setSearch}
                             />
                             <CommandList>
                               {psychologists.length === 0 && search !== "" ? (
-                                <CommandEmpty>No results found.</CommandEmpty>
+                                <CommandEmpty>Sonuç bulunamadı.</CommandEmpty>
                               ) : (
                                 <CommandGroup>
                                   {psychologists?.map((psychologist) => (
@@ -297,12 +297,12 @@ export function PatientForm({
                   )}
 
                   <div className="grid gap-2">
-                    <Label htmlFor="fee">Psychologist Fee</Label>
+                    <Label htmlFor="fee">Psikolog Ücreti</Label>
                     <Input
                       id="fee"
                       type="number"
                       step="0.01"
-                      placeholder="Enter Psychologist fee"
+                      placeholder="Hasta ücretini girin"
                       required
                       value={fee}
                       onChange={(e) => setFee(e.target.value)}
@@ -312,12 +312,12 @@ export function PatientForm({
 
                   {isAdmin && (
                     <div className="grid gap-2">
-                      <Label htmlFor="fee">Patient Fee</Label>
+                      <Label htmlFor="fee">Psikolog Ücreti</Label>
                       <Input
                         id="patientFee"
                         type="number"
                         step="0.01"
-                        placeholder="Enter Patient fee"
+                        placeholder="Hasta ücretini girin"
                         required
                         value={patientFee ?? ""}
                         onChange={(e) => setPatientFee(e.target.value)}
@@ -334,16 +334,16 @@ export function PatientForm({
                     onClick={handleCancel}
                     disabled={isLoading}
                   >
-                    Cancel
+                    İptal Et
                   </Button>
                   <Button type="submit" disabled={isLoading}>
                     {isLoading
                       ? patientToEdit
-                        ? "Updating Patient..."
-                        : "Adding Patient..."
+                        ? "Hasta Güncelleniyor..."
+                        : "Hasta Ekleniyor..."
                       : patientToEdit
-                      ? "Update Patient"
-                      : "Add Patient"}
+                        ? "Hastayı Güncelle"
+                        : "Hasta Ekle"}
                   </Button>
                 </DialogFooter>
               </form>

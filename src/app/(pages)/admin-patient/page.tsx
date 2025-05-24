@@ -17,21 +17,21 @@ export default async function AdminPatient() {
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="admin-assigned"
                            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground hover:bg-secondary"
-              >Admin Assigned Patients</TabsTrigger>
+              >Yönetici Atanan Hastalar</TabsTrigger>
               <TabsTrigger value="other"
                            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground hover:bg-secondary"
-              >Other Patients</TabsTrigger>
+              >Diğer Hastalar</TabsTrigger>
             </TabsList>
             <TabsContent value="admin-assigned">
               <PatientTable
-                  title="Admin Assigned Patients"
+                  title="Yönetici Atanan Hastalar"
                   columns={columns}
                   data={adminAssignedPatients}
               />
             </TabsContent>
             <TabsContent value="other">
               <PatientTable
-                  title="Other Patients"
+                  title="Diğer Hastalar"
                   columns={columns}
                   data={otherPatients}
               />

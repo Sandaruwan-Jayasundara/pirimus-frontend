@@ -15,25 +15,25 @@ export function MainNav({
             href="/examples/dashboard"
             className="text-sm font-medium transition-colors hover:text-primary"
         >
-          Dashboard
+          Gösterge Paneli
         </Link>
         <Link
             href="/examples/dashboard"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
         >
-          Psychologist Management
+        Psikolog Yönetimi
         </Link>
         <Link
             href="/examples/dashboard"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
         >
-          Client Management
+          Müşteri Yönetimi
         </Link>
         <Link
             href="/examples/dashboard"
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
         >
-          Room Management
+      Oda Yönetimi
         </Link>
       </nav>
   );

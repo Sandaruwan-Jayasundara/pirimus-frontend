@@ -28,7 +28,7 @@ export function RoomManagementTabs() {
   return (
     <div className="p-4">
       <CommissionTable
-        title={"Room fee for Appointment"}
+        title={"Randevu için Oda Ücreti"}
         data={roomCommission}
         tab="pending"
       />

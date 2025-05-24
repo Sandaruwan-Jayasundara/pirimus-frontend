@@ -35,7 +35,7 @@ const MessageStatusCell: React.FC<Props> = ({ appointment }) => {
         onClick={handleOpenDialog}
         disabled={isLoading}
       >
-        {isLoading ? "Loading..." : "View Messages"}
+        {isLoading ? "Yükleniyor..." : "Mesajları Görüntüle"}
       </Button>
       <MessageStatusDialog
         appointment={appointment}

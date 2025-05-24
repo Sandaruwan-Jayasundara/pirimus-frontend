@@ -25,7 +25,7 @@ export default function LoginPage() {
               fill="currentFill"
             />
           </svg>
-          <span className="sr-only">Loading...</span>
+          <span className="sr-only">Yükleniyor...</span>
         </div>
       </div>
     );

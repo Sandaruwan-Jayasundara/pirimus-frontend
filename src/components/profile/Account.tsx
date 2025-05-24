@@ -100,13 +100,13 @@ export function Account()
   return (
       <Tabs defaultValue="account" className="w-[400px]">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="account">Account</TabsTrigger>
-          <TabsTrigger value="password">Password</TabsTrigger>
+          <TabsTrigger value="account">Hesap</TabsTrigger>
+          <TabsTrigger value="password">Şifre</TabsTrigger>
         </TabsList>
 
         <TabsContent value="account" className="space-y-4 p-4">
           <div className="space-y-2">
-            <Label htmlFor="firstName">First Name</Label>
+            <Label htmlFor="firstName">Ad</Label>
             <Input
                 id="firstName"
                 value={formData.firstName}
@@ -114,7 +114,7 @@ export function Account()
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="lastName">Last Name</Label>
+            <Label htmlFor="lastName">Soyad</Label>
             <Input
                 id="lastName"
                 value={formData.lastName}
@@ -122,7 +122,7 @@ export function Account()
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="phoneNumber">Phone Number</Label>
+            <Label htmlFor="phoneNumber">Telefon Numarası</Label>
             <Input
                 id="phoneNumber"
                 type="tel"
@@ -134,12 +134,12 @@ export function Account()
                 title="Phone number format: 0 (555) 123 45 67"
             />
           </div>
-          <Button onClick={handleSaveChanges}>Save changes</Button>
+          <Button onClick={handleSaveChanges}>Değişiklikleri Kaydet</Button>
         </TabsContent>
 
         <TabsContent value="password" className="space-y-4 p-4">
           <div className="space-y-2">
-            <Label htmlFor="current">Current password</Label>
+            <Label htmlFor="current">Mevcut Şifre</Label>
             <Input
                 id="current"
                 type="password"
@@ -148,7 +148,7 @@ export function Account()
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="new">New password</Label>
+            <Label htmlFor="new">Yeni Şifre</Label>
             <Input
                 id="new"
                 type="password"
@@ -156,7 +156,7 @@ export function Account()
                 onChange={handlePasswordChange}
             />
           </div>
-          <Button onClick={handleChangePassword}>Save password</Button>
+          <Button onClick={handleChangePassword}>Şifreyi Kaydet</Button>
         </TabsContent>
       </Tabs>
   );

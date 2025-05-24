@@ -37,7 +37,7 @@ const ViewWorkingHoursDialog: React.FC<ViewWorkingHoursDialogProps> = ({
 
 
         } catch (err) {
-          setError("Failed to fetch working hours. Please try again.");
+          setError("Psikolog çalışma saatlerini eklemedi. Lütfen daha sonra tekrar deneyin.");
           console.error(err);
         } finally {
           setLoading(false);
@@ -52,21 +52,21 @@ const ViewWorkingHoursDialog: React.FC<ViewWorkingHoursDialogProps> = ({
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" size="sm">
-          View Hours
+           Saatleri Görüntüle
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Psychologist Working Days</DialogTitle>
+        <DialogTitle>Psikolog Çalışma Günleri</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           {loading ? (
-            <p className="text-sm text-muted-foreground">Loading...</p>
+            <p className="text-sm text-muted-foreground">Yükleniyor...</p>
           ) : error ? (
             <p className="text-sm text-destructive">{error}</p>
           ) : workingHours && workingHours.length > 0 ? (
             <div className="border rounded-lg p-3">
-              <h3 className="font-medium mb-2">Working Days</h3>
+           <h3 className="font-medium mb-2">Çalışma Günleri</h3>
               <ul className="space-y-4">
                 {workingHours.map((day, index) => (
                   <li key={index}>
@@ -79,7 +79,7 @@ const ViewWorkingHoursDialog: React.FC<ViewWorkingHoursDialogProps> = ({
                         </div>
                       ))
                     ) : (
-                      <div className="text-xs text-muted-foreground italic">No slots available</div>
+                      <div className="text-xs text-muted-foreground italic">Uygun zaman yok</div>
                     )}
                   </li>
                 ))}

@@ -24,6 +24,7 @@ import { getBlockedTimingAction } from "@/api/BlockedTimingApi";
 import { AvailabilityTable } from "./AvailabilityTable";
 import { PatientPayment } from "@/type/PatientPayment";
 import { WorkingHours } from "@/type/WorkingHours";
+import { tr } from 'date-fns/locale';
 
 interface CheckAvailabilityTableProps<TData> {
   title: string;
@@ -302,7 +303,7 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
         <div className="grid gap-2 me-4">
           <Select value={psychologistId} onValueChange={setPsychologist}>
             <SelectTrigger id="psychologist" className="w-full bg-primary/10">
-              <SelectValue placeholder="Select a psychologist" />
+              <SelectValue placeholder="Bir psikolog seçin" />
             </SelectTrigger>
             <SelectContent>
               {psychologistData.map((psy, index) => (
@@ -317,7 +318,7 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
         <Popover>
           <PopoverTrigger asChild>
             <Button variant="outline" className="w-[180px] text-left bg-primary/10">
-              {timeDate ? format(timeDate, "PPP") : "Pick a date"}
+              {timeDate ? format(timeDate, "PPP") : "Bir tarih seçin"}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0">
@@ -325,6 +326,7 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
               mode="single"
               selected={timeDate}
               onSelect={setTimeData}
+              locale={tr}
             />
           </PopoverContent>
         </Popover>
@@ -333,7 +335,7 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
         <div className="grid gap-2 ms-4">
           <Select value={time} onValueChange={setTime} disabled={!timeDate}>
             <SelectTrigger id="time" className="w-full bg-primary/10">
-              <SelectValue placeholder="Select a time slot" />
+              <SelectValue placeholder="Bir zaman dilimi seçin" />
             </SelectTrigger>
             <SelectContent>
               {availableTimeSlots.map((slot) => (
@@ -351,7 +353,7 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
           disabled={!psychologistId || !timeDate || !time}
           onClick={() => searchAvailability(timeDate, time, psychologistId)}
         >
-          Search
+          Ara
         </Button>
       </div>
       <AvailabilityTable title={title} columns={columns} data={roomData} />

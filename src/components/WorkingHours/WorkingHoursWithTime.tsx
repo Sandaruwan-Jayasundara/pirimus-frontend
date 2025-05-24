@@ -45,7 +45,7 @@ const formatTime = (time: string): string => {
   return `${hours}:${minutes}`; // Return HH:mm
 };
 
-export function WorkingHoursWithTime({initialAvailability, onAvailabilitySet}: WorkingHoursWithTimeProps) {
+export function WorkingHoursWithTime({ initialAvailability, onAvailabilitySet }: WorkingHoursWithTimeProps) {
   const getInitialAvailability = (): WorkingHoursWithTimeData => {
     const defaultAvailability: WorkingHoursWithTimeData = {
       availability: {
@@ -87,16 +87,16 @@ export function WorkingHoursWithTime({initialAvailability, onAvailabilitySet}: W
     const updatedAvailability = { ...defaultAvailability.availability };
     (initialAvailability?.days as unknown as Availability[])?.forEach((avail: Availability) => {
       if (avail.dayOfWeek && avail?.slots) {
-      updatedAvailability[avail.dayOfWeek] = {
-        isActive: true,
-        slots: avail.slots.map((slot: TimeSlotDto) => ({
-        id: slot.id,
-        startTime: formatTime(slot.startTime), // Convert HH:mm:ss to HH:mm
-        endTime: formatTime(slot.endTime), // Convert HH:mm:ss to HH:mm
-        isAvailable:
-          slot.isAvailable !== undefined ? slot.isAvailable : true,
-        })),
-      };
+        updatedAvailability[avail.dayOfWeek] = {
+          isActive: true,
+          slots: avail.slots.map((slot: TimeSlotDto) => ({
+            id: slot.id,
+            startTime: formatTime(slot.startTime), // Convert HH:mm:ss to HH:mm
+            endTime: formatTime(slot.endTime), // Convert HH:mm:ss to HH:mm
+            isAvailable:
+              slot.isAvailable !== undefined ? slot.isAvailable : true,
+          })),
+        };
       }
     });
 
@@ -185,7 +185,7 @@ export function WorkingHoursWithTime({initialAvailability, onAvailabilitySet}: W
       const transformedData: Availability[] = Object.entries(
         formData.availability
       )
-        .filter(([{}, dayData]) => dayData.isActive)
+        .filter(([{ }, dayData]) => dayData.isActive)
         .map(([day, dayData]) => ({
           dayOfWeek: day,
           slots: dayData.slots.map((slot) => ({
@@ -218,9 +218,9 @@ export function WorkingHoursWithTime({initialAvailability, onAvailabilitySet}: W
   return (
     <DialogContent className="sm:max-w-[425px]">
       <DialogHeader>
-        <DialogTitle>Room Availability</DialogTitle>
+        <DialogTitle>Oda Müsaitliği</DialogTitle>
         <DialogDescription>
-          Set the availability schedule for the room.
+          Oda için müsaitlik takvimini belirleyin.
         </DialogDescription>
       </DialogHeader>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -316,7 +316,7 @@ export function WorkingHoursWithTime({initialAvailability, onAvailabilitySet}: W
         </div>
         <DialogFooter>
           <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Saving..." : "Save Availability"}
+            {isLoading ? "Kaydediliyor..." : "Müsaitliği Kaydet"}
           </Button>
         </DialogFooter>
       </form>

@@ -34,7 +34,7 @@ export default function DailyAppointmentList({
 }: DailyAppointmentListProps) {
   return (
     <div className="rounded-lg border p-4">
-      <h2 className="text-lg font-semibold">Daily Appointment List</h2>
+      <h2 className="text-lg font-semibold">Günlük Randevu Listesi</h2>
       <div className="mt-9 md:mt-4 space-y-6">
         <Tabs defaultValue="admin-assigned-appointments" className="space-y-4">
           <TabsList
@@ -47,7 +47,7 @@ export default function DailyAppointmentList({
                data-[state=active]:bg-green-500
                data-[state=active]:text-white"
             >
-              Admin Assigned Appointments
+              Admin Atanmış Randevular
             </TabsTrigger>
 
             <TabsTrigger
@@ -56,7 +56,7 @@ export default function DailyAppointmentList({
                data-[state=active]:bg-green-500
                data-[state=active]:text-white"
             >
-              Own Appointments
+              Kendi Randevularım
             </TabsTrigger>
           </TabsList>
 
@@ -67,11 +67,11 @@ export default function DailyAppointmentList({
             <Table className=" mt-6 md:mt-4">
               <TableHeader>
                 <TableRow>
-                  <TableHead>Client Name</TableHead>
-                  <TableHead>Time</TableHead>
-                  <TableHead>Room Name</TableHead>
-                  <TableHead>Branch Name</TableHead>
-                  <TableHead>Status</TableHead>
+                  <TableHead>Müşteri Adı</TableHead>
+                  <TableHead>Zaman</TableHead>
+                  <TableHead>Oda Adı</TableHead>
+                  <TableHead>Şube Adı</TableHead>
+                  <TableHead>Durum</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -102,11 +102,12 @@ export default function DailyAppointmentList({
             <Table className="text-xs mt-4">
               <TableHeader>
                 <TableRow>
-                  <TableHead>Client Name</TableHead>
-                  <TableHead>Time</TableHead>
-                  <TableHead>Room Name</TableHead>
-                  <TableHead>Branch Name</TableHead>
-                  <TableHead>Status</TableHead>
+
+                  <TableHead>Müşteri Adı</TableHead>
+                  <TableHead>Zaman</TableHead>
+                  <TableHead>Oda Adı</TableHead>
+                  <TableHead>Şube Adı</TableHead>
+                  <TableHead>Durum</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -125,7 +126,7 @@ export default function DailyAppointmentList({
                 ) : (
                   <TableRow>
                     <TableCell colSpan={5} className="text-center">
-                      No data
+                      Veri yok
                     </TableCell>
                   </TableRow>
                 )}

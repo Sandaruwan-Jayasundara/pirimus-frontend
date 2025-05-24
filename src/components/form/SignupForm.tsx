@@ -33,21 +33,21 @@ import { formatPhoneNumber } from "@/lib/phoneUtils";
 
 // Zod schema for signup form
 const SignupFormSchema = z.object({
-  firstName: z.string().min(1, { message: "First name is required" }),
-  lastName: z.string().min(1, { message: "Last name is required" }),
+  firstName: z.string().min(1, { message: "Ad gereklidir" }),
+  lastName: z.string().min(1, { message: "Soyad gereklidir" }),
   phoneNumber: z.string().regex(/^0 \(\d{3}\) \d{3} \d{2} \d{2}$/, {
-    message: "Invalid phone number format",
+    message: "Geçersiz telefon numarası formatı",
   }),
-  seniority: z.string().min(1, { message: "Seniority level is required" }),
-  email: z.string().email({ message: "Invalid email address" }),
+  seniority: z.string().min(1, { message: "Kıdem seviyesi gereklidir" }),
+  email: z.string().email({ message: "Geçersiz e-posta adresi" }),
   password: z
     .string()
-    .min(8, { message: "Password must be at least 8 characters" })
+    .min(8, { message: "Şifre en az 8 karakter olmalıdır" })
     .regex(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d])[a-zA-Z\d\W]{8,}$/,
       {
         message:
-          "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+          "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character - Şifre en az bir büyük harf, bir küçük harf, bir rakam ve bir özel karakter içermelidir",
       }
     ),
 });
@@ -85,18 +85,18 @@ export function SignupForm({
       };
       const response = await AuthService.signup(userData);
       if (response) {
-        toast.success("Registration Successful", {
-          description: "Your account has been created. Please log in.",
-        });
+        toast.success("Kayıt Başarılı", {
+          description: "Hesabınız oluşturuldu. Lütfen giriş yapın.",
+        });        
         router.push("/login");
       }
     } catch (err) {
-      toast.error("Signup Failed", {
+      toast.error("Kayıt Başarısız", {
         description:
           err instanceof Error
             ? err.message
-            : "An error occurred during signup.",
-      });
+            : "Kayıt sırasında bir hata oluştu.",
+      });      
     } finally {
       setIsLoading(false);
     }
@@ -123,10 +123,10 @@ export function SignupForm({
                 />
               </svg>
             </div>
-            <CardTitle className="medical-title">Signup</CardTitle>
+            <CardTitle className="medical-title">Kayıt Ol</CardTitle>
           </div>
           <CardDescription className="medical-description">
-            Create your account
+            Hesabınızı oluşturun
           </CardDescription>
         </CardHeader>
         <CardContent className="max-h-[60vh] overflow-y-auto scrollbar-hide">
@@ -140,7 +140,7 @@ export function SignupForm({
                 name="firstName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-700">First Name</FormLabel>
+                    <FormLabel className="text-gray-700">Ad</FormLabel>
                     <FormControl>
                       <Input
                         className="medical-input"
@@ -159,7 +159,7 @@ export function SignupForm({
                 name="lastName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-700">Last Name</FormLabel>
+                    <FormLabel className="text-gray-700">Soyad</FormLabel>
                     <FormControl>
                       <Input
                         className="medical-input"
@@ -178,9 +178,7 @@ export function SignupForm({
                 name="phoneNumber"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-700">
-                      Phone Number
-                    </FormLabel>
+                    <FormLabel className="text-gray-700">Telefon Numarası</FormLabel>
                     <FormControl>
                       <Input
                         className="medical-input"
@@ -222,9 +220,7 @@ export function SignupForm({
                 name="seniority"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-700">
-                      Seniority Level
-                    </FormLabel>
+                    <FormLabel className="text-gray-700">Kıdem Seviyesi</FormLabel>
                     <FormControl>
                       <Input
                         className="medical-input"
@@ -243,9 +239,7 @@ export function SignupForm({
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-700">
-                      Email Address
-                    </FormLabel>
+                    <FormLabel className="text-gray-700">E-posta Adresi</FormLabel>
                     <FormControl>
                       <Input
                         className="medical-input"
@@ -264,7 +258,7 @@ export function SignupForm({
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-gray-700">Password</FormLabel>
+                    <FormLabel className="text-gray-700">Şifre</FormLabel>
                     <FormControl>
                       <div className="relative">
                         <Input
@@ -304,16 +298,16 @@ export function SignupForm({
             disabled={isLoading}
             onClick={form.handleSubmit(handleSubmit)}
           >
-            {isLoading ? "Creating account..." : "Register"}
+            {isLoading ? "Hesap oluşturuluyor..." : "Kayıt Ol"}
           </Button>
         </CardFooter>
         <div className="mt-4 pb-6 text-center text-sm text-gray-600">
-          Already have an account?{" "}
+          Zaten bir hesabınız var mı?{" "}
           <Link
             href="/login"
             className="text-blue-600 hover:text-blue-800 font-medium"
           >
-            Login
+            Giriş Yap
           </Link>
         </div>
       </Card>

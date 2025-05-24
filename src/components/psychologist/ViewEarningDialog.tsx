@@ -63,26 +63,26 @@ const ViewEarningsDialog: React.FC<ViewEarningsDialogProps> = ({psychologistId})
       }}>
         <DialogTrigger asChild>
           <Button variant="outline" size="sm" className="bg-yellow-500/10">
-            View Earnings
+          Kazançları Görüntüle
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Earnings for Psychologist ID: {psychologistId}</DialogTitle>
+            <DialogTitle>Psikolog Kimliği İçin Kazançlar: {psychologistId}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             {loading ? (
-                <p className="text-sm text-muted-foreground">Loading...</p>
+                <p className="text-sm text-muted-foreground">Yükleniyor...</p>
             ) : error ? (
                 <p className="text-sm text-destructive">{error}</p>
             ) : (
                 <>
                   <div>
-                    <h3 className="font-medium">Client Referrals Earning</h3>
+                    <h3 className="font-medium">Danışan Yönlendirme Kazancı</h3>
                     <p className="text-sm">₺{adminEarnings?.toFixed(2) ?? "0.00"}</p>
                   </div>
                   <div>
-                    <h3 className="font-medium">Room Rentals Earnings</h3>
+                    <h3 className="font-medium">Oda Kiralama Kazançları</h3>
                     <p className="text-sm">₺{nonAdminEarnings?.toFixed(2) ?? "0.00"}</p>
                   </div>
                 </>

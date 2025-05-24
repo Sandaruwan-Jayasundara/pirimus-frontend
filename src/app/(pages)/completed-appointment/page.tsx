@@ -7,7 +7,7 @@ export default async function Appointments() {
   return (
     <ProtectedRoute allowedRoles={[Role.ADMIN, Role.PSYCHOLOGIST]}>
         <CompletedAppointmentTable
-                title="Completed Appointments"
+                title="Tamamlanan Randevular"
                 columns={columns}
             />
     </ProtectedRoute>

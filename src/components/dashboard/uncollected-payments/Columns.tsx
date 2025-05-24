@@ -41,7 +41,7 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     accessorKey: "psychologist",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Psychologist Name"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Psikolog Adı"/>,
     cell: ({row}) => {
       const appointment = row.original;
       const psychologist: Psychologist | undefined = appointment.psychologist;
@@ -50,7 +50,7 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     accessorKey: "patient",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Client Name"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Hasta Adı"/>,
     cell: ({row}) => {
       const appointment = row.original;
       return `${appointment.patient?.firstName || ""} ${appointment.patient?.lastName || ""}`.trim() || "N/A";
@@ -58,7 +58,7 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     accessorKey: "totalFee",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Total Amount"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Toplam Tutar"/>,
     cell: ({row}) => {
       const totalFee = row.original.totalFee;
       return `₺${(totalFee ?? 0).toFixed(2)}`;
@@ -66,7 +66,7 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     accessorKey: "remainingAmount",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Remaining Amount"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Kalan Tutar"/>,
     cell: ({row}) => {
       const remainingAmount = row.original.remainingAmount;
       return `₺${(remainingAmount ?? 0).toFixed(2)}`;
@@ -74,12 +74,12 @@ export const columns: ColumnDef<Appointment>[] = [
   },
   {
     accessorKey: "branchName",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Branch Name"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Şube Adı"/>,
     cell: ({row}) => row.original.branchName || "N/A",
   },
   {
     accessorKey: "roomName",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Room Name"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Oda Adı"/>,
     cell: ({row}) => row.original.roomName || "N/A",
   },
 ];

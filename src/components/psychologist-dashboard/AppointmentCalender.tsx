@@ -1,6 +1,7 @@
 'use client';
 import {Calendar} from "@/components/ui/calendar";
 import {useState} from "react";
+import { tr } from 'date-fns/locale';
 
 export default function AppointmentCalendar() {
   const [date, setDate] = useState<Date | undefined>(new Date());
@@ -13,6 +14,7 @@ export default function AppointmentCalendar() {
             selected={date}
             onSelect={setDate}
             className="mt-4"
+            locale={tr}
         />
       </div>
   );

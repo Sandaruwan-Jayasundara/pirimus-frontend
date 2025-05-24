@@ -20,18 +20,18 @@ const ClientNotes: React.FC<Props> = ({ patient }) => {
     return (
       <div className="text-right">
         <Button variant="outline" onClick={() => setIsDialogOpen(true)}>
-          View Notes
+          Notları Görüntüle
         </Button>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Client Notes</DialogTitle>
+              <DialogTitle>Danışan Notları</DialogTitle>
             </DialogHeader>
             <div className="space-y-4">
               {patient.clientNotes && patient.clientNotes.trim() !== "" ? (
                 <p>{patient.clientNotes}</p>
               ) : (
-                <p>No notes available</p>
+                <p>Mevcut not yok</p>
               )}
             </div>
             <div className="mt-4 text-right">
@@ -39,7 +39,7 @@ const ClientNotes: React.FC<Props> = ({ patient }) => {
                 variant="outline"
                 onClick={() => setIsDialogOpen(false)}
               >
-                Close
+                Kapat
               </Button>
             </div>
           </DialogContent>

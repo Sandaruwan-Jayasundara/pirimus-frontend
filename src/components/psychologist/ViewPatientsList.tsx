@@ -76,31 +76,31 @@ const ViewPatientsList: React.FC<ViewPatientsListProps> = ({
     >
       <DialogTrigger asChild>
         <Button variant="outline" size="sm" className="bg-blue-500/10">
-          View Patients
+        Hastaları Görüntüle
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[550px]">
         <DialogHeader>
           <DialogTitle>
-            Patients List for Psychologist: {psychologistId}
+          Psikolog için Hasta Listesi: {psychologistId}
           </DialogTitle>
         </DialogHeader>
         <div className="space-y-4 mb-5">
           {loading ? (
-            <p className="text-sm text-muted-foreground">Loading...</p>
+            <p className="text-sm text-muted-foreground">Yükleniyor...</p>
           ) : error ? (
             <p className="text-sm text-destructive">{error}</p>
           ) : (
             <>
               {adminEarnings?.length === 0 && nonAdminEarnings?.length === 0 ? (
                 <p className="text-sm text-muted-foreground">
-                  No patients found.
+              Hasta bulunamadı.
                 </p>
               ) : (
                 <div className="flex justify-between mt-5">
                   <div>
                     <p className="text-xs italic font-bold mb-2 ms-3 ">
-                      Admin Patient
+                    Yönetici Hastası
                     </p>
                     <hr />
                     {adminEarnings?.map((patient) => (
@@ -128,7 +128,7 @@ const ViewPatientsList: React.FC<ViewPatientsListProps> = ({
                   </div>
                   <div>
                     <p className="text-xs italic font-bold mb-2">
-                      Psychologist Patient
+                    Psikolog Hastası
                     </p>
                     <hr />
                     {nonAdminEarnings?.map((patient) => (

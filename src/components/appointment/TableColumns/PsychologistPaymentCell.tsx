@@ -64,8 +64,8 @@ const PsychologistPaymentCell: React.FC<Props> = ({ appointment }) => {
     setPaymentStatus(newStatus);
     setHasChanges(
       newStatus !== appointment.paymentStatus ||
-        paidAmount !== appointment.paidAmount ||
-        paymentType !== appointment.paymentType
+      paidAmount !== appointment.paidAmount ||
+      paymentType !== appointment.paymentType
     );
   };
 
@@ -81,8 +81,8 @@ const PsychologistPaymentCell: React.FC<Props> = ({ appointment }) => {
     setPaidAmount(numericValue);
     setHasChanges(
       numericValue !== appointment.paidAmount ||
-        paymentStatus !== appointment.paymentStatus ||
-        paymentType !== appointment.paymentType
+      paymentStatus !== appointment.paymentStatus ||
+      paymentType !== appointment.paymentType
     );
   };
 
@@ -90,8 +90,8 @@ const PsychologistPaymentCell: React.FC<Props> = ({ appointment }) => {
     setPaymentType(newPaymentType);
     setHasChanges(
       newPaymentType !== appointment.paymentType ||
-        paidAmount !== appointment.paidAmount ||
-        paymentStatus !== appointment.paymentStatus
+      paidAmount !== appointment.paidAmount ||
+      paymentStatus !== appointment.paymentStatus
     );
   };
 
@@ -136,15 +136,39 @@ const PsychologistPaymentCell: React.FC<Props> = ({ appointment }) => {
     return Object.values(PaymentStatus);
   };
 
+  const paymentStatusLabels = (status: string) => {
+    const labels: Record<string, string> = {
+      CASH: "Nakit",
+      CREDIT_CARD: "Kredi Kartı",
+      DEBIT_CARD: "Banka Kartı",
+      BANK_TRANSFER: "Banka Havalesi",
+      ONLINE_PAYMENT: "Online Ödeme",
+      INSURANCE: "Sigorta",
+    };
+    return labels[status] ?? status;
+  };
+
+
+    
+  const statusLabels = (status: string) => {
+    const labels: Record<string, string> = {
+      PENDING: "Beklemede",
+      COMPLETED: "Tamamlandı",
+    };
+  
+    return labels[status] ?? status;
+  };
+  
+
   return (
     <div className="text-right">
       <Button variant="outline" onClick={handleOpenDialog} className="bg-yellow-500/10">
-        Payment Information
+      Ödeme Bilgileri
       </Button>
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Psychologist Payment Information</DialogTitle>
+            <DialogTitle>Psikolog Ödeme Bilgileri</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="border-t border-gray-200 my-4"></div>
@@ -153,116 +177,116 @@ const PsychologistPaymentCell: React.FC<Props> = ({ appointment }) => {
                 className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
                 role="alert"
               >
-                Payment Completed ${appointment?.paidAmount?.toFixed(2)}
+                Ödeme Tamamlandı ₺{appointment?.paidAmount?.toFixed(2)}
               </div>
             ) : (
 
-              (appointment.patient.isAssignByAdmin  && appointment.assignedByAdmin ) || (isAdmin && appointment.patient.isAssignByAdmin  && !appointment.assignedByAdmin )? (
-              <>
+              (appointment.patient.isAssignByAdmin && appointment.assignedByAdmin) || (isAdmin && appointment.patient.isAssignByAdmin && !appointment.assignedByAdmin) ? (
+                <>
 
-                <div>
-                  <strong>Total Amount:</strong> $
-                  {appointment.patient.fee?.toFixed(2)}
-                </div>
-                <div>
-                  <Label htmlFor="paidAmount">Paid Amount</Label>
-                  <Input
-                    id="paidAmount"
-                    type="number"
-                    value={paidAmount === 0 ? "" : paidAmount}
-                    onChange={(e) => handlePaidAmountChange(e.target.value)}
-                    disabled={isLoading}
-                    min="0"
-                    step="0.01"
-                    placeholder="Enter paid amount"
-                    className="w-full"
-                  />
-                </div>
-                {error && (
-                  <span
-                    className="p-4 mb-4 text-sm text-red-800 rounded-lg dark:bg-gray-800"
-                    role="alert"
-                  >
-                    {error}
-                  </span>
-                )}
-                <div>
-                  <Label htmlFor="paymentStatus">Payment Status</Label>
-                  <Select
-                    value={paymentStatus}
-                    onValueChange={handlePaymentStatusChange}
-                    disabled={isLoading}
-                  >
-                    <SelectTrigger id="paymentStatus" className="w-full">
-                      <SelectValue placeholder="Select payment status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {getFilteredStatuses(paymentProportion).map(
-                        (statusOption) => (
-                          <SelectItem key={statusOption} value={statusOption}>
-                            {statusOption}
+                  <div>
+                    <strong>Total Amount:</strong> ₺
+                    {appointment.patient.fee?.toFixed(2)}
+                  </div>
+                  <div>
+                    <Label htmlFor="paidAmount">Ödenen Tutar</Label>
+                    <Input
+                      id="paidAmount"
+                      type="number"
+                      value={paidAmount === 0 ? "" : paidAmount}
+                      onChange={(e) => handlePaidAmountChange(e.target.value)}
+                      disabled={isLoading}
+                      min="0"
+                      step="0.01"
+                      placeholder="Enter paid amount"
+                      className="w-full"
+                    />
+                  </div>
+                  {error && (
+                    <span
+                      className="p-4 mb-4 text-sm text-red-800 rounded-lg dark:bg-gray-800"
+                      role="alert"
+                    >
+                      {error}
+                    </span>
+                  )}
+                  <div>
+                    <Label htmlFor="paymentStatus">Ödeme Durumu</Label>
+                    <Select
+                      value={paymentStatus}
+                      onValueChange={handlePaymentStatusChange}
+                      disabled={isLoading}
+                    >
+                      <SelectTrigger id="paymentStatus" className="w-full">
+                        <SelectValue placeholder="Select payment status" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {getFilteredStatuses(paymentProportion).map(
+                          (statusOption) => (
+                            <SelectItem key={statusOption} value={statusOption}>
+                              {statusLabels(statusOption)}
+                            </SelectItem>
+                          )
+                        )}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <Label htmlFor="paymentType">Ödeme Türü</Label>
+                    <Select
+                      value={paymentType}
+                      onValueChange={handlePaymentTypeChange}
+                      disabled={isLoading}
+                    >
+                      <SelectTrigger id="paymentType" className="w-full">
+                        <SelectValue placeholder="Ödeme türünü seçin" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Object.values(PaymentType).map((typeOption) => (
+                          <SelectItem key={typeOption} value={typeOption}>
+                            {paymentStatusLabels(typeOption)}
                           </SelectItem>
-                        )
-                      )}
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <Label htmlFor="paymentType">Payment Type</Label>
-                  <Select
-                    value={paymentType}
-                    onValueChange={handlePaymentTypeChange}
-                    disabled={isLoading}
-                  >
-                    <SelectTrigger id="paymentType" className="w-full">
-                      <SelectValue placeholder="Select payment type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {Object.values(PaymentType).map((typeOption) => (
-                        <SelectItem key={typeOption} value={typeOption}>
-                          {typeOption}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </>
-              ):(
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </>
+              ) : (
                 <div
-                className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
-                role="alert"
-              >
-                Payment is managed by Psychologist
-              </div>
+                  className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                  role="alert"
+                >
+                  Ödeme, Psikolog tarafından yönetilmektedir
+                </div>
               )
             )}
           </div>
-         { (appointment.patient.isAssignByAdmin  && appointment.assignedByAdmin ) || (isAdmin && appointment.patient.isAssignByAdmin  && !appointment.assignedByAdmin )&& (
-          <div className="mt-4 text-right space-x-2">
-            {hasChanges && paymentStatus === PaymentStatus.COMPLETED ? (
-              <>
-                <Button
-                  variant="outline"
-                  onClick={handleCancel}
-                  disabled={isLoading}
-                >
-                  Cancel
+          {(appointment.patient.isAssignByAdmin && appointment.assignedByAdmin) || (isAdmin && appointment.patient.isAssignByAdmin && !appointment.assignedByAdmin) && (
+            <div className="mt-4 text-right space-x-2">
+              {hasChanges && paymentStatus === PaymentStatus.COMPLETED ? (
+                <>
+                  <Button
+                    variant="outline"
+                    onClick={handleCancel}
+                    disabled={isLoading}
+                  >
+                    İptal
+                  </Button>
+                  <Button
+                    onClick={handleSave}
+                    disabled={
+                      isLoading || paidAmount !== appointment?.patient?.fee
+                    }
+                  >
+                    {isLoading ? "Kaydediliyor..." : "Kaydet"}
+                  </Button>
+                </>
+              ) : (
+                <Button variant="outline" onClick={handleCancel}>
+                  Kapat
                 </Button>
-                <Button
-                  onClick={handleSave}
-                  disabled={
-                    isLoading || paidAmount !== appointment?.patient?.fee
-                  }
-                >
-                  {isLoading ? "Saving..." : "Save"}
-                </Button>
-              </>
-            ) : (
-              <Button variant="outline" onClick={handleCancel}>
-                Close
-              </Button>
-            )}
-          </div>
+              )}
+            </div>
           )}
         </DialogContent>
       </Dialog>

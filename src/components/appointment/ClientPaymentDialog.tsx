@@ -128,11 +128,22 @@ export function ClientPaymentDialog({
     return Object.values(PaymentStatus);
   };
 
+
+      
+  const statusLabels = (status: string) => {
+    const labels: Record<string, string> = {
+        PENDING: "Beklemede",
+        PARTIALLY_PAID: "Kısmen Ödendi",
+        COMPLETED: "Tamamlandı",
+    };
+    return labels[status] ?? status;
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Client Payment Information</DialogTitle>
+        <DialogTitle>Danışan Ödeme Bilgileri</DialogTitle>
         </DialogHeader>
 
         {(appointment.patient.isAssignByAdmin  && appointment.assignedByAdmin ) || (isAdmin && appointment.patient.isAssignByAdmin  && !appointment.assignedByAdmin ) || (!isAdmin && !appointment.patient.isAssignByAdmin  && !appointment.assignedByAdmin )? (
@@ -140,15 +151,15 @@ export function ClientPaymentDialog({
             <>
               <div className="space-y-4">
                 <div>
-                  <strong>Total Amount:</strong> ${totalFee.toFixed(2)}
+                  <strong>Toplam Tutar:</strong> ${totalFee.toFixed(2)}
                 </div>
                 <div>
-                  <strong>Remaining Amount:</strong> $
+                  <strong>Kalan Tutar:</strong> $
                   {remainingAmount.toFixed(2)}
                 </div>
                 <div className="border-t border-gray-200 my-4"></div>
                 <div>
-                  <Label htmlFor="clientPaidAmount">Paid Amount</Label>
+                  <Label htmlFor="clientPaidAmount">Ödenen Tutar</Label>
                   <Input
                     id="clientPaidAmount"
                     type="number"
@@ -161,12 +172,12 @@ export function ClientPaymentDialog({
                     disabled={isLoading}
                     min="0"
                     step="0.01"
-                    placeholder="Enter paid amount"
+                    placeholder="Ödenen tutarı girin"
                     className="w-full"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="clientPaymentStatus">Payment Status</Label>
+                  <Label htmlFor="clientPaymentStatus">Ödeme Durumu</Label>
                   <Select
                     value={paymentStatus}
                     onValueChange={handlePaymentStatusChange}
@@ -179,7 +190,7 @@ export function ClientPaymentDialog({
                       {getFilteredStatuses(paymentProportion).map(
                         (statusOption) => (
                           <SelectItem key={statusOption} value={statusOption}>
-                            {statusOption}
+                            {statusLabels(statusOption)}
                           </SelectItem>
                         )
                       )}
@@ -195,15 +206,15 @@ export function ClientPaymentDialog({
                       onClick={handleCancel}
                       disabled={isLoading}
                     >
-                      Cancel
+                      Kapat
                     </Button>
                     <Button onClick={handleSave} disabled={isLoading}>
-                      {isLoading ? "Saving..." : "Save"}
+                    {isLoading ? "Kaydediliyor..." : "Kaydet"}  
                     </Button>
                   </>
                 ) : (
                   <Button variant="outline" onClick={handleCancel}>
-                    Close
+                    Kapat
                   </Button>
                 )}
               </div>
@@ -216,9 +227,9 @@ export function ClientPaymentDialog({
                 role="alert"
               >
                 {(appointment.patient.isAssignByAdmin  && appointment.assignedByAdmin && !isAdmin)?
-                  " Payment is managed by Admin"
+                  "Ödeme, Yönetici tarafından yönetilmektedir"
                   :
-                  `Payment Completed $${totalFee.toFixed(2)}`}
+                  `Ödeme Tamamlandı $${totalFee.toFixed(2)}`}
               </div>
             </>
           )
@@ -228,7 +239,7 @@ export function ClientPaymentDialog({
               className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
               role="alert"
             >
-              Payment is managed by Psychologist
+              Ödeme, Psikolog tarafından yönetilmektedir
             </div>
           </>
         )}

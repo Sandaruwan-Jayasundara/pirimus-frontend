@@ -9,7 +9,7 @@ export default async function Psychologist() {
   const data = await getPsychologist();
   return (
       <ProtectedRoute allowedRoles={[Role.ADMIN]}>
-        <PsychologistTable title="Psychologist Management" columns={columns} data={data}/>
+        <PsychologistTable title="Psikolog Yönetimi" columns={columns} data={data}/>
       </ProtectedRoute>
   );
 }

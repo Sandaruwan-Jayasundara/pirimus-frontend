@@ -1,5 +1,5 @@
 "use client";
-import {  useState } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -109,10 +109,10 @@ export function LoginForm({
                 />
               </svg>
             </div>
-            <CardTitle className="medical-title">Login</CardTitle>
+            <CardTitle className="medical-title">Giriş Yap</CardTitle>
           </div>
           <CardDescription className="medical-description">
-            Access your profile securely
+            Profilinize güvenli bir şekilde erişin
           </CardDescription>
         </CardHeader>
         <CardContent className="max-h-[60vh] overflow-y-auto scrollbar-hide">
@@ -127,7 +127,7 @@ export function LoginForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-gray-700">
-                      Email Address
+                      E-posta Adresi
                     </FormLabel>
                     <FormControl>
                       <Input
@@ -148,12 +148,12 @@ export function LoginForm({
                 render={({ field }) => (
                   <FormItem>
                     <div className="flex items-center justify-between">
-                      <FormLabel className="text-gray-700">Password</FormLabel>
+                      <FormLabel className="text-gray-700">Şifre</FormLabel>
                       <Link
                         href="/forgot-password"
                         className="text-sm text-blue-600 hover:text-blue-800 font-medium"
                       >
-                        Forgot your password?
+                        Şifrenizi mi unuttunuz?
                       </Link>
                     </div>
                     <FormControl>
@@ -210,16 +210,16 @@ export function LoginForm({
             disabled={isLoading}
             onClick={form.handleSubmit(handleSubmit)}
           >
-            {isLoading ? "Logging in..." : "Login"}
+            {isLoading ? "Giriş yapılıyor..." : "Giriş Yap"}
           </Button>
         </CardFooter>
         <div className="mt-4 pb-6 text-center text-sm text-gray-600">
-          Don&apos;t have an account?{" "}
+          Hesabınız yok mu?{" "}
           <Link
             href="/signup"
             className="text-blue-600 hover:text-blue-800 font-medium"
           >
-            Sign up
+            Kayıt Ol
           </Link>
         </div>
       </Card>

@@ -82,13 +82,13 @@ export function NavUser()
               <DropdownMenuGroup>
                 <DropdownMenuItem onClick={() => setIsAccountDialogOpen(true)}>
                   <BadgeCheck/>
-                  Account
+                  Hesap
                 </DropdownMenuItem>
               </DropdownMenuGroup>
               <DropdownMenuSeparator/>
               <DropdownMenuItem onClick={handleLogout}>
                 <LogOut/>
-                Log out
+                Çıkış Yap
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -98,7 +98,7 @@ export function NavUser()
         <Dialog open={isAccountDialogOpen} onOpenChange={setIsAccountDialogOpen}>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
-              <DialogTitle>Account Settings</DialogTitle>
+            <DialogTitle>Hesap Ayarları</DialogTitle>
             </DialogHeader>
             <Account/>
           </DialogContent>

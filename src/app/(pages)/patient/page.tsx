@@ -10,8 +10,7 @@ export default async function Patient() {
 
   return (
       <ProtectedRoute allowedRoles={[Role.PSYCHOLOGIST]}>
-
-        <PatientTable title={"Patient Management"} columns={columns} data={data}/>
+        <PatientTable title={"Hasta Yönetimi"} columns={columns} data={data}/>
       </ProtectedRoute>
   )
 }

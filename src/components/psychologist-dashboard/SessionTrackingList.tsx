@@ -63,7 +63,7 @@ export default function SessionTrackingList() {
   return (
     <div className="rounded-lg border p-4 w-full">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">Session Tracking List</h2>
+        <h2 className="text-lg font-semibold">Oturum Takip Listesi</h2>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="border-green-500">
@@ -73,28 +73,28 @@ export default function SessionTrackingList() {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem onClick={() => handlePeriodChange("daily")}>
-              Daily
+              Günlük
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => handlePeriodChange("weekly")}>
-              Weekly
+              Haftalık
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => handlePeriodChange("monthly")}>
-              Monthly
+              Aylık
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
       <p className="text-sm text-muted-foreground mt-2">
-        Listing for {period} appointments
+        Randevular için {period} Listeleme
       </p>
       <Table className="text-xs mt-4">
         <TableHeader>
           <TableRow>
-            <TableHead>Client</TableHead>
-            <TableHead>Time</TableHead>
-            <TableHead>Room Name</TableHead>
-            <TableHead>Branch Name</TableHead>
-            <TableHead>Status</TableHead>
+            <TableHead>Müşteri</TableHead>
+            <TableHead>Zaman</TableHead>
+            <TableHead>Oda Adı</TableHead>
+            <TableHead>Şube Adı</TableHead>
+            <TableHead>Durum</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -124,7 +124,7 @@ export default function SessionTrackingList() {
           ) : (
             <TableRow>
               <TableCell colSpan={5} className="text-center text-xs sm:text-sm">
-                No appointments found for this period.
+                Bu dönem için randevu bulunamadı.
               </TableCell>
             </TableRow>
           )}

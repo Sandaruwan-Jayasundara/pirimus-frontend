@@ -11,51 +11,51 @@ export const columns: ColumnDef<Patient>[] = [
   {
     accessorKey: "id",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="ID" />
+      <DataTableColumnHeader column={column} title="Kimlik" />
     ),
   },
   {
     accessorKey: "firstName",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="First Name" />
+      <DataTableColumnHeader column={column} title="Ad" />
     ),
   },
   {
     accessorKey: "lastName",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Last Name" />
+      <DataTableColumnHeader column={column} title="Soyad" />
     ),
   },
   {
     accessorKey: "email",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Email" />
+      <DataTableColumnHeader column={column} title="E-posta" />
     ),
   },
   {
     accessorKey: "phone",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Phone" />
+      <DataTableColumnHeader column={column} title="Telefon" />
     ),
   },
   {
     accessorKey: "clientNotes",
-    header: () => <div className="text-right">Notes</div>,
+    header: () => <div className="text-right">Notlar</div>,
     cell: ({ row }) => <ClientNotes patient={row.original} />,
     
   },
   {
     accessorKey: "status",
-    header: () => <div className="text-right">Status</div>,
+    header: () => <div className="text-right">Durum</div>,
     cell: ({ row }) => <Status patient={row.original} />,
   },
   {
     accessorKey: "psychologist",
-    header: () => <div className="text-right">Psychologist</div>,
+    header: () => <div className="text-right">Psikolog</div>,
     cell: ({ row }) => <PsychologistCol patient={row.original} />,
   },
   {
     id: "actions",
-    header: () => <div className="text-right">Actions</div>,
+    header: () => <div className="text-right">İşlemler</div>,
   },
 ];

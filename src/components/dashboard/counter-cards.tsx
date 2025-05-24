@@ -19,6 +19,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { getRoomIncomeCountAction, getPsychologistCountAction } from "@/api/PaymentApi";
+import { tr } from 'date-fns/locale';
 
 type CardsProps = {
   psychCount: number;
@@ -101,7 +102,7 @@ export function Cards({
       <Card className="shadow-md hover:shadow-lg transition-shadow bg-primary/10 duration-300">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-lg font-semibold text-foreground">
-            Total Psychologists
+            Toplam Psikolog
           </CardTitle>
           <Stethoscope className="h-5 w-5 text-primary" />
         </CardHeader>
@@ -116,7 +117,7 @@ export function Cards({
       <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 bg-blue-500/10">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-lg font-semibold text-foreground">
-            Active Clients
+            Aktif Danışanlar
           </CardTitle>
           <Users className="h-5 w-5 text-primary" />
         </CardHeader>
@@ -131,7 +132,7 @@ export function Cards({
       <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 bg-yellow-500/10">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-lg font-semibold text-foreground">
-            Appointments
+            Randevular
           </CardTitle>
           <div className="flex items-center gap-2">
             <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>
@@ -139,9 +140,9 @@ export function Cards({
                 <SelectValue placeholder="Select period" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="daily">Daily</SelectItem>
-                <SelectItem value="weekly">Weekly</SelectItem>
-                <SelectItem value="monthly">Monthly</SelectItem>
+                <SelectItem value="daily">Günlük</SelectItem>
+                <SelectItem value="weekly">Haftalık</SelectItem>
+                <SelectItem value="monthly">Aylık</SelectItem>
               </SelectContent>
             </Select>
             <ClipboardList className="h-5 w-5 text-primary" />
@@ -158,7 +159,7 @@ export function Cards({
       <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 bg-red-500/10">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-lg font-semibold text-foreground">
-            Room Income Status
+            Oda Gelir Durumu
           </CardTitle>
           <div className="flex items-center gap-1">
             <Popover>
@@ -169,10 +170,11 @@ export function Cards({
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0">
                 <Calendar
+                  locale={tr}
                   mode="single"
                   selected={selectedDate}
                   onSelect={(date) => setSelectedDate(date ?? new Date())}
-                  // disabled={(date) => date > new Date()}
+                // disabled={(date) => date > new Date()}
                 />
               </PopoverContent>
             </Popover>
@@ -184,9 +186,9 @@ export function Cards({
             ₺
             {typeof roomIncomeCount === "number"
               ? roomIncomeCount.toLocaleString(undefined, {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })
               : "N/A"}
           </div>
         </CardContent>
@@ -195,10 +197,10 @@ export function Cards({
       <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 	bg-purple-500/10">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-lg font-semibold text-foreground">
-            Psychologist Revenue
+            Psikolog Geliri
           </CardTitle>
           <div className="flex items-center gap-1">
-          <Popover>
+            <Popover>
               <PopoverTrigger asChild>
                 <Button variant="outline" className="w-[180px] text-left 	bg-purple-200">
                   {psychologistDate ? format(psychologistDate, "PPP") : "Pick a date"}
@@ -206,10 +208,11 @@ export function Cards({
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0">
                 <Calendar
+                  locale={tr}
                   mode="single"
                   selected={psychologistDate}
                   onSelect={(date) => setPsychologistDate(date ?? new Date())}
-                  // disabled={(date) => date > new Date()}
+                // disabled={(date) => date > new Date()}
                 />
               </PopoverContent>
             </Popover>

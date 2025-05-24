@@ -34,7 +34,7 @@ export function WorkingHoursForm({
   onClose,
 }: WorkingHoursFormProps) {
 
-  
+
   const getInitialDays = (): WorkingHR => {
     // Check if initialData exists and has a days array with length > 0
     if (initialData && initialData.days && initialData.days.length > 0) {
@@ -49,9 +49,9 @@ export function WorkingHoursForm({
       },
       days: [],
       dayOfWeek: "",
-      length: 0, 
+      length: 0,
     };
-    
+
   };
 
   const [formData, setFormData] = useState<WorkingHR>(getInitialDays());
@@ -137,14 +137,15 @@ export function WorkingHoursForm({
           onClick={handleCancel}
           disabled={isPending}
         >
-          Cancel
+          İptal
         </Button>
+
         <Button type="submit" disabled={isPending} onClick={handleSubmit}>
           {isPending
-            ? "Saving..."
+            ? "Kaydediliyor..."
             : formData.id
-            ? "Update Working Days"
-            : "Save Working Days"}
+              ? "Çalışma Günlerini Güncelle"
+              : "Çalışma Günlerini Kaydet"}
         </Button>
       </DialogFooter>
     </DialogContent>

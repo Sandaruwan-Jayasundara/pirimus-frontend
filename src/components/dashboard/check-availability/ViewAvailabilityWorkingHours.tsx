@@ -66,7 +66,7 @@ const ViewAvailabilityWorkingHoursDialog: React.FC<
             setWorkingHours([]);
           }
         } catch (err) {
-          setError("Failed to fetch working hours. Please try again.");
+          setError("Psikolog çalışma saatlerini eklemedi. Lütfen daha sonra tekrar deneyin.");
           console.error(err);
         } finally {
           setLoading(false);
@@ -88,16 +88,16 @@ const ViewAvailabilityWorkingHoursDialog: React.FC<
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" size="sm">
-          View Hours
+        Saatleri Görüntüle
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[800px]">
         <DialogHeader>
-          <DialogTitle>Psychologist Availability</DialogTitle>
+        <DialogTitle>Psikolog Müsaitliği</DialogTitle>
         </DialogHeader>
         <div className="mt-4">
           {loading ? (
-            <p className="text-sm text-muted-foreground">Loading...</p>
+            <p className="text-sm text-muted-foreground">Yükleniyor...</p>
           ) : error ? (
             <p className="text-sm text-destructive">{error}</p>
           ) : workingHours && workingHours.length > 0 ? (

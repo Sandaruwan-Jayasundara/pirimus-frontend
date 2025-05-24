@@ -7,28 +7,28 @@ import ViewTimeSlotsDialog from "@/components/room/admin/ViewTimeSlots";
 export const columns: ColumnDef<Room>[] = [
   {
     accessorKey: "name",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Name"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="İsim"/>,
   },
   {
     accessorKey: "floorNumber",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Floor"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Kat"/>,
   },
   {
     accessorKey: "hourlyRate",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Hourly Rate"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Saatlik Ücret"/>,
   },
   {
     accessorKey: "branch.name",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Branch"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Şube Adı"/>,
   },
   {
     accessorKey: "branch.contactNumber",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Contact Number"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="İletişim Numarası"/>,
   },
   
   {
     id: "viewSlots",
-    header: () => <div className="text-center">Availability</div>,
+    header: () => <div className="text-center">Uygunluk</div>,
     cell: ({row}) => {
       const room = row.original;
       return (
@@ -40,11 +40,11 @@ export const columns: ColumnDef<Room>[] = [
   },
   {
     accessorKey: "status",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Room Status"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Oda Durumu"/>,
   },
   {
     accessorKey: "psyAvailability",
-    header: ({column}) => <DataTableColumnHeader column={column} title="Psychologist Status"/>,
+    header: ({column}) => <DataTableColumnHeader column={column} title="Psikolog Durumu"/>,
   }
 
 ];

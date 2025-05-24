@@ -27,35 +27,35 @@ const PsychologistCell: React.FC<Props> = ({ appointment }) => {
         onClick={() => setIsDialogOpen(true)}
         disabled={!psychologist}
       >
-        View Psychologist
+       Psikologu Görüntüle
       </Button>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Psychologist Information</DialogTitle>
+            <DialogTitle>Psikolog Bilgileri</DialogTitle>
           </DialogHeader>
 
           {psychologist ? (
             <div className="space-y-4">
               <div>
-                <strong>Name:</strong> {psychologist.firstName}{" "}
+                <strong>Ad:</strong> {psychologist.firstName}{" "}
                 {psychologist.lastName}
               </div>
               <div>
-                <strong>Email:</strong> {psychologist.email}
+                <strong>E-posta:</strong> {psychologist.email}
               </div>
               <div>
-                <strong>Phone:</strong> {psychologist.phoneNumber}
+                <strong>Telefon:</strong> {psychologist.phoneNumber}
               </div>
             </div>
           ) : (
-            <p>No psychologist assigned to this appointment.</p>
+            <p>Bu randevuya atanmış bir psikolog yok.</p>
           )}
 
           <div className="mt-4 text-right">
             <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
-              Close
+              Kapat
             </Button>
           </div>
         </DialogContent>

@@ -51,6 +51,24 @@ type StatusCellProps = {
       setIsLoading(false);
     };
   
+    const statusLabels = (status: string) => {
+      const labels: Record<string, string> = {
+        SCHEDULED : "Planlandı",
+        COMPLETED : "Tamamlandı",
+        CANCELLED : "İptal Edildi",
+        NOT_ATTENDED : "Katılmadı",
+        IN_PROGRESS : "Devam Ediyor",
+        CONFIRMED : "Onaylandı",
+        RESCHEDULED : "Yeniden Planlandı",
+        NO_SHOW : "Gelmeyen"
+        
+      };
+    
+      return labels[status] ?? status;
+    };
+  
+    
+
     return (
       <div className="text-right">
         <Select
@@ -64,7 +82,7 @@ type StatusCellProps = {
           <SelectContent>
             {Object.values(AppointmentStatus).map((statusOption) => (
               <SelectItem key={statusOption} value={statusOption}>
-                {statusOption}
+                {statusLabels(statusOption)}
               </SelectItem>
             ))}
           </SelectContent>

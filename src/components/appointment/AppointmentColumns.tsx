@@ -15,7 +15,7 @@ export const columns: ColumnDef<Appointment>[] = [
   {
     accessorKey: "startTime",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Date" />
+      <DataTableColumnHeader column={column} title="Tarih" />
     ),
     cell: ({ row }) => {
       const startTime = row.original.startTime;
@@ -28,7 +28,7 @@ export const columns: ColumnDef<Appointment>[] = [
   {
     id: "timeRange",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Time" />
+      <DataTableColumnHeader column={column} title="Saat" />
     ),
     cell: ({ row }) => {
       const startTime = row.original.startTime;
@@ -46,7 +46,7 @@ export const columns: ColumnDef<Appointment>[] = [
   {
     accessorKey: "patient",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Client Name" />
+      <DataTableColumnHeader column={column} title="Müşteri Adı" />
     ),
     cell: ({ row }) => {
       const appointment = row.original;
@@ -56,44 +56,44 @@ export const columns: ColumnDef<Appointment>[] = [
   {
     accessorKey: "branchName",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Branch" />
+      <DataTableColumnHeader column={column} title="Şube" />
     ),
     cell: ({ row }) => row.original.branchName || "N/A",
   },
   {
     accessorKey: "roomName",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Room Name" />
+      <DataTableColumnHeader column={column} title="Oda Adı" />
     ),
     cell: ({ row }) => row.original.roomName,
   },
   {
     accessorKey: "status",
-    header: () => <div className="text-right">Status</div>,
+    header: () => <div className="text-right">Durum</div>,
     cell: ({ row }) => <StatusCell appointment={row.original} />,
   },
   {
     accessorKey: "psychologist",
-    header: () => <div className="text-right">Psychologist</div>,
+    header: () => <div className="text-right">Psikolog</div>,
     cell: ({ row }) => <PsychologistCell appointment={row.original} />,
   },
   {
     id: "psychologistPayment",
-    header: () => <div className="text-right">Psychologist Payment</div>,
+    header: () => <div className="text-right">Psikolog Ödemesi</div>,
     cell: ({ row }) => <PsychologistPaymentCell appointment={row.original} />,
   },
   {
     id: "clientPayment",
-    header: () => <div className="text-right">Client Payment</div>,
+    header: () => <div className="text-right">Müşteri Ödemesi</div>,
     cell: ({ row }) => <ClientPaymentCell appointment={row.original} />,
   },
   {
     id: "messageStatus",
-    header: () => <div className="text-right">Message Status</div>,
+    header: () => <div className="text-right">Mesaj Durumu</div>,
     cell: ({ row }) => <MessageStatusCell appointment={row.original} />,
   },
   {
     id: "actions",
-    header: () => <div className="text-right">Actions</div>,
+    header: () => <div className="text-right">İşlemler</div>,
   },
 ];

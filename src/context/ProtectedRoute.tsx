@@ -40,7 +40,7 @@ export default function ProtectedRoute({children, allowedRoles}: ProtectedRouteP
 
   if (isLoading)
   {
-    return <div className="flex h-screen items-center justify-center">Loading...</div>;
+    return <div className="flex h-screen items-center justify-center">Yükleniyor...</div>;
   }
 
   return isAuthenticated && user && allowedRoles.includes(user.role as string) ? (

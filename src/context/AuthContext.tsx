@@ -59,10 +59,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const response = await AuthService.login({ email, password });
 
       // Show success toast (redirect handled in AuthContext)
-      toast.success("Login Successful", {
-        description: "Welcome back! You are now logged in.",
+      toast.success("Giriş Başarılı", {
+        description: "Hoş geldiniz! Şimdi giriş yaptınız.",
       });
-
+      
       document.cookie = `token=${response.jwtToken}; path=/;`;
       const userData: User = {
         id: response.id,

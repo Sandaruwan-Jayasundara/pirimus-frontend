@@ -9,7 +9,7 @@ export default async function Dashboard() {
   return (
       <ProtectedRoute allowedRoles={[Role.PSYCHOLOGIST]}>
       <div className="space-y-6 mt-5">
-        <h1 className="text-2xl font-bold">Dashboard</h1>
+        <h1 className="text-2xl font-bold">Gösterge Paneli</h1>
         <hr/>
         <div className="grid grid-cols-1 ">
           {/* <AppointmentCalendar/> */}

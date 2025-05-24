@@ -157,17 +157,18 @@ export function BranchTable<TData extends Branch & { startTime?: string; status?
         <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Confirm Deletion</DialogTitle>
-              <DialogDescription>
-                Are you sure you want to delete this branch? This action will mark the branch as deleted.
-              </DialogDescription>
+            <DialogTitle>Silme Onayı</DialogTitle>
+<DialogDescription>
+  Bu şubeyi silmek istediğinizden emin misiniz? Bu işlem şubenin silinmiş olarak işaretlenmesine neden olacaktır.
+</DialogDescription>
+
             </DialogHeader>
             <DialogFooter>
               <Button variant="outline" onClick={handleDeleteDialogClose}>
-                Cancel
+              İptal
               </Button>
               <Button variant="destructive" onClick={confirmDelete}>
-                Delete
+              Sil
               </Button>
             </DialogFooter>
           </DialogContent>

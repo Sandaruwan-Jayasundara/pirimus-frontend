@@ -94,12 +94,12 @@ export default async function Dashboard() {
         </div>
 
         <div className="mt-5">
-            <CheckAvailabilityTable
-                    title="Check Availability"
-                    psychologistData={dashboardData.psychologistData || []}
-    
-                  />
-            </div>
+          <CheckAvailabilityTable
+            title="Müsaitliği Kontrol Et"
+            psychologistData={dashboardData.psychologistData || []}
+
+          />
+        </div>
 
 
         <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
@@ -110,19 +110,19 @@ export default async function Dashboard() {
                 value="daily-appointments"
                 className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground hover:bg-secondary"
               >
-                Daily Appointments
+                Günlük Randevular
               </TabsTrigger>
               <TabsTrigger
                 value="cancelled-appointments"
                 className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground hover:bg-secondary"
               >
-                Cancelled Appointments
+                İptal Edilen Randevular
               </TabsTrigger>
               <TabsTrigger
                 value="uncollected-payment"
                 className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground hover:bg-secondary"
               >
-                Uncollected Payment
+                Toplanmamış Ödeme
               </TabsTrigger>
             </TabsList>
             <TabsContent value="cancelled-appointments" className="space-y-4">
@@ -130,7 +130,7 @@ export default async function Dashboard() {
                 <Card className="col-span-4 shadow-lg">
                   <CardHeader>
                     <CardTitle className="text-foreground">
-                      Cancelled Appointments
+                      İptal Edilen Randevular
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pl-2">
@@ -144,7 +144,7 @@ export default async function Dashboard() {
                 <Card className="col-span-4 shadow-lg">
                   <CardHeader>
                     <CardTitle className="text-foreground">
-                      Uncollected Payments
+                      Toplanmamış Ödeme
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pl-2">
@@ -158,7 +158,7 @@ export default async function Dashboard() {
                 <Card className="col-span-4 shadow-lg">
                   <CardHeader>
                     <CardTitle className="text-foreground">
-                      Daily Appointments
+                      Günlük Randevular
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="pl-2">
@@ -168,13 +168,13 @@ export default async function Dashboard() {
               </div>
             </TabsContent>
           </Tabs>
-            <div className="mt-5">
+          <div className="mt-5">
             <PsychologistAvailableTable
-                    title="Psychologist Availability"
-                    columns={columns}
-                    data={dashboardData.psychologistData || []}
-                  />
-            </div>
+              title="Psikolog Müsaitliği"
+              columns={columns}
+              data={dashboardData.psychologistData || []}
+            />
+          </div>
 
         </div>
       </div>

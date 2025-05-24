@@ -80,7 +80,7 @@ export function AppointmentTable<TData extends Appointment, TValue>({
   const handleAppointmentAdded = (appointment: Appointment) => {
     setData((prev) => [...prev, appointment as TData]);
     setIsDialogOpen(false);
-    toast.success("Success", { description: "Appointment added successfully" });
+    toast.success("Success", { description: "Randevu başarıyla eklendi" });
   };
 
   const handleAppointmentUpdated = (updatedAppointment: Appointment) => {
@@ -93,7 +93,7 @@ export function AppointmentTable<TData extends Appointment, TValue>({
     );
     setIsDialogOpen(false);
     toast.success("Success", {
-      description: "Appointment updated successfully",
+      description: "Randevu başarıyla güncellendi",
     });
   };
 
@@ -106,7 +106,7 @@ export function AppointmentTable<TData extends Appointment, TValue>({
     const appointment = data.find((appt) => appt.id === appointmentId);
     if (appointment?.status === AppointmentStatus.COMPLETED) {
       toast.error("Cannot Delete", {
-        description: "Completed appointments cannot be deleted",
+        description: "Tamamlanan randevular silinemez",
       });
       return;
     }
@@ -122,11 +122,11 @@ export function AppointmentTable<TData extends Appointment, TValue>({
           prev.filter((appointment) => appointment.id !== appointmentToDelete)
         );
         toast.success("Success", {
-          description: "Appointment deleted successfully",
+          description: "Randevu başarıyla silindi",
         });
       } catch (err) {
         console.error("Failed to delete appointment:", err);
-        toast.error("Error", { description: "Failed to delete appointment" });
+        toast.error("Error", { description: "Randevu silinemedi" });
       } finally {
         setIsDeleteDialogOpen(false);
         setAppointmentToDelete(null);
@@ -207,18 +207,17 @@ export function AppointmentTable<TData extends Appointment, TValue>({
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Confirm Deletion</DialogTitle>
+            <DialogTitle>Silme İşlemini Onayla</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete this appointment? This action
-              cannot be undone.
+              Bu randevuyu silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={handleDeleteDialogClose}>
-              Cancel
+              İptal
             </Button>
             <Button variant="destructive" onClick={confirmDelete}>
-              Delete
+              Sil
             </Button>
           </DialogFooter>
         </DialogContent>

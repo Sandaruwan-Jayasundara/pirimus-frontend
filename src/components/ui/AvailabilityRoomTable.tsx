@@ -69,9 +69,9 @@ export function AvailabilityRoomTable<TData extends { psyAvailability?: string }
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                       </TableHead>
                     ))}
                   </TableRow>
@@ -94,31 +94,31 @@ export function AvailabilityRoomTable<TData extends { psyAvailability?: string }
                             colSpan={columns.length}
                             className="text-center text-blue-500 font-semibold text-xs sm:text-sm bg-blue-50"
                           >
-                            Search to Check Availability
+                            Müsaitliği Kontrol Etmek İçin Ara
+
                           </TableCell>
                         ) : (
                           row.getVisibleCells().map((cell) => (
                             <TableCell
                               key={cell.id}
-                              className={`text-xs sm:text-sm ${
-                                cell.column.id === "status"
+                              className={`text-xs sm:text-sm ${cell.column.id === "status"
                                   ? cell.getValue() === "OCCUPIED"
                                     ? "text-red-500 font-bold border bg-red-100 py-0"
                                     : "text-green-500 font-bold border bg-green-100 py-0"
                                   : cell.column.id === "psyAvailability"
-                                  ? cell.getValue() === "AVAILABLE"
-                                    ? "text-green-500 font-bold border bg-green-100 py-0"
-                                    : "text-red-500 font-bold border bg-red-100 py-0"
-                                  : "text-foreground"
-                              }`}
+                                    ? cell.getValue() === "AVAILABLE"
+                                      ? "text-green-500 font-bold border bg-green-100 py-0"
+                                      : "text-red-500 font-bold border bg-red-100 py-0"
+                                    : "text-foreground"
+                                }`}
                             >
                               {cell.column.id === "status" &&
-                              cell.getValue() === "OCCUPIED"
+                                cell.getValue() === "OCCUPIED"
                                 ? "Unavailable"
                                 : flexRender(
-                                    cell.column.columnDef.cell,
-                                    cell.getContext()
-                                  )}
+                                  cell.column.columnDef.cell,
+                                  cell.getContext()
+                                )}
                             </TableCell>
                           ))
                         )}

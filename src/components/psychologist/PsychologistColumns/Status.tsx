@@ -26,7 +26,7 @@ const Status: React.FC<Props> = ({ psychologist }) => {
             psychologist.status = newStatus;
             router.refresh();
           } catch (error) {
-            console.error("Error updating status:", error);
+            console.error("Durum güncellenirken hata oluştu", error);
           }
         }}
       >
@@ -34,8 +34,8 @@ const Status: React.FC<Props> = ({ psychologist }) => {
           <SelectValue placeholder="Select status" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="ACTIVE">ACTIVE</SelectItem>
-          <SelectItem value="INACTIVE">INACTIVE</SelectItem>
+        <SelectItem value="ACTIVE">AKTİF</SelectItem>
+        <SelectItem value="INACTIVE">PASİF</SelectItem>
         </SelectContent>
       </Select>
     </div>

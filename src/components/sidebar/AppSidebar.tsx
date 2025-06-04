@@ -6,7 +6,7 @@ import {
   Building,
   Calendar,
   ClipboardList,
-  DoorClosed,
+  // DoorClosed,
   DoorOpen,
   Home,
   Hourglass,

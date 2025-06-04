@@ -71,6 +71,9 @@ const SidebarProvider = React.forwardRef<
     ) => {
       const isMobile = useIsMobile()
       const [openMobile, setOpenMobile] = React.useState(false)
+      const [currentPath, setCurrentPath] = React.useState(
+        typeof window !== "undefined" ? window.location.pathname : ""
+      );
 
       // This is the internal state of the sidebar.
       // We use openProp and setOpenProp for control from outside the component.
@@ -93,12 +96,39 @@ const SidebarProvider = React.forwardRef<
           [setOpenProp, open]
       )
 
+
+      React.useEffect(() => {
+        if (typeof window === "undefined") return;
+    
+        const checkPathChange = () => {
+          if (window.location.pathname !== currentPath) {
+            setCurrentPath(window.location.pathname);
+            setOpen(false);
+            setOpenMobile(false);
+          }
+        };
+    
+        // Listen for popstate event (back/forward browser buttons)
+        window.addEventListener("popstate", checkPathChange);
+    
+        // Also check periodically (not ideal, but covers other changes)
+        const interval = setInterval(checkPathChange, 500);
+    
+        return () => {
+          window.removeEventListener("popstate", checkPathChange);
+          clearInterval(interval);
+        };
+      }, [currentPath]);
+
+
       // Helper to toggle the sidebar.
       const toggleSidebar = React.useCallback(() => {
         return isMobile
             ? setOpenMobile((open) => !open)
             : setOpen((open) => !open)
       }, [isMobile, setOpen, setOpenMobile])
+
+
 
       // Adds a keyboard shortcut to toggle the sidebar.
       React.useEffect(() => {

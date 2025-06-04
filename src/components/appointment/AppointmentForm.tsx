@@ -535,7 +535,7 @@ export function AppointmentForm({
             </DialogHeader>
             <form onSubmit={handleSubmit}>
               <div
-                className="flex flex-col gap-6 py-4 max-h-[60vh] overflow-y-auto"
+                className="flex flex-col px-3 md:px-0 gap-6 py-4 max-h-[60vh] overflow-y-auto"
                 style={{ maxHeight: "60vh" }}
               >
                 {error && (

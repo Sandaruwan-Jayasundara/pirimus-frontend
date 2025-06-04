@@ -25,6 +25,7 @@ import { AvailabilityTable } from "./AvailabilityTable";
 import { PatientPayment } from "@/type/PatientPayment";
 import { WorkingHours } from "@/type/WorkingHours";
 import { tr } from 'date-fns/locale';
+import { Input } from "@/components/ui/input";
 
 interface CheckAvailabilityTableProps<TData> {
   title: string;
@@ -60,6 +61,8 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
 }: CheckAvailabilityTableProps<TData>) {
   const [timeDate, setTimeData] = React.useState<Date | undefined>(new Date());
   const [time, setTime] = React.useState("");
+  const [searchTerm, setSearchTerm] = React.useState("");
+
   const [availableTimeSlots, setAvailableTimeSlots] = React.useState<string[]>(
     []
   );
@@ -296,23 +299,38 @@ export function CheckAvailabilityTable<TData extends Psychologist>({
     }
   };
 
+  const filteredPsychologists = psychologistData.filter((psy) =>
+    `${psy.firstName} ${psy.lastName}`.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  
   return (
     <>
       <div className="flex w-full justify-end items-center mb-4 border p-3">
         {/* Time Slot Selection */}
         <div className="grid gap-2 me-4">
-          <Select value={psychologistId} onValueChange={setPsychologist}>
-            <SelectTrigger id="psychologist" className="w-full bg-primary/10">
-              <SelectValue placeholder="Bir psikolog seçin" />
-            </SelectTrigger>
-            <SelectContent>
-              {psychologistData.map((psy, index) => (
+        <Select value={psychologistId} onValueChange={setPsychologist}>
+          <SelectTrigger id="psychologist" className="w-full bg-primary/10">
+            <SelectValue placeholder="Bir psikolog seçin" />
+          </SelectTrigger>
+          <SelectContent>
+            <div className="px-2 py-1">
+              <Input
+                placeholder="Ara..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full"
+              />
+            </div>
+            {searchTerm && filteredPsychologists.length > 0 ? (
+              filteredPsychologists.map((psy, index) => (
                 <SelectItem key={index} value={psy.id.toString()}>
                   {psy.firstName} {psy.lastName}
                 </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+              ))
+            ) : null}
+          </SelectContent>
+        </Select>
+
         </div>
 
         <Popover>

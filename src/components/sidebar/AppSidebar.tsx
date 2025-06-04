@@ -77,12 +77,12 @@ const menuItems = [
     icon: Users,
     roles: ["ADMIN"],
   },
-  {
-    title: "Hasta Yönetimi",
-    url: "/room",
-    icon: DoorClosed,
-    roles: ["ADMIN"],
-  },
+  // {
+  //   title: "Hasta Yönetimi",
+  //   url: "/room",
+  //   icon: DoorClosed,
+  //   roles: ["PSYCHOLOGIST"],
+  // },
   {
     title: "Oda Randevusu",
     url: "/room-appointment",

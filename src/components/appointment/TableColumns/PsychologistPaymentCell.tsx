@@ -261,8 +261,9 @@ const PsychologistPaymentCell: React.FC<Props> = ({ appointment }) => {
               )
             )}
           </div>
-          {(appointment.patient.isAssignByAdmin && appointment.assignedByAdmin) || (isAdmin && appointment.patient.isAssignByAdmin && !appointment.assignedByAdmin) && (
-            <div className="mt-4 text-right space-x-2">
+          {
+  ((appointment.patient.isAssignByAdmin && appointment.assignedByAdmin) ||
+   (isAdmin && appointment.patient.isAssignByAdmin && !appointment.assignedByAdmin)) && ( <div className="mt-4 text-right space-x-2">
               {hasChanges && paymentStatus === PaymentStatus.COMPLETED ? (
                 <>
                   <Button

@@ -2,7 +2,6 @@
 import {ColumnDef} from "@tanstack/react-table";
 import {DataTableColumnHeader} from "@/components/ui/ColumnHeader";
 import {Psychologist} from "@/type/psychologist";
-import ViewWorkingHoursDialog from "@/components/psychologist/ViewWorkingHours";
 import ViewEarningsDialog from "@/components/psychologist/ViewEarningDialog";
 import ViewPatientsList from "./ViewPatientsList";
 import Status from "./PsychologistColumns/Status";
@@ -25,18 +24,6 @@ export const columns: ColumnDef<Psychologist>[] = [
     accessorKey: "phoneNumber",
     header: ({column}) => <DataTableColumnHeader column={column} title="Telefon"/>,
   },
-  // {
-  //   accessorKey: "workingHours",
-  //   header: () => <div className="text-right">Working Hours</div>,
-  //   cell: ({row}) => {
-  //     const psychologist = row.original;
-  //     return (
-  //         <div className="text-right">
-  //           <ViewWorkingHoursDialog psychologistId={psychologist.id}/>
-  //         </div>
-  //     );
-  //   },
-  // },
   {
     accessorKey: "status",
     header: () => <div className="text-right">Durum</div>,
